@@ -13,7 +13,7 @@ export default function TrendsContainer(props) {
 						key={trend.id}
 						className='m-1 rounded-xl bg-purple-100 p-2 text-center'
 					>
-						{props.name === 'Twitter' && (
+						{(props.name === 'Twitter' || props.name === 'Google') && (
 							<div>
 								#{index + 1} - {trend.name}
 							</div>
@@ -31,6 +31,16 @@ function webIcon(name) {
 			<Image
 				src='/../public/images/twitter-icon.png'
 				alt='Twitter Icon'
+				width={25}
+				height={25}
+				className='m-1'
+			/>
+		)
+	} else if (name === 'Google') {
+		return (
+			<Image
+				src='/../public/images/google-icon.png'
+				alt='Google Icon'
 				width={25}
 				height={25}
 				className='m-1'
