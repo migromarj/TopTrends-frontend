@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function TrendsContainer(props) {
 	return (
-		<div className='m-3 w-3/12'>
+		<div className='m-3 w-96'>
 			<div className='flex items-center justify-center'>
 				{webIcon(props.name)}
 				<h2 className='text-2xl font-bold'>{props.name}</h2>
@@ -16,6 +16,12 @@ export default function TrendsContainer(props) {
 						{(props.name === 'Twitter' || props.name === 'Google') && (
 							<div>
 								#{index + 1} - {trend.name}
+							</div>
+						)}
+
+						{props.name === 'YouTube' && (
+							<div>
+								#{index + 1} - {trend.title}
 							</div>
 						)}
 					</div>
@@ -41,6 +47,16 @@ function webIcon(name) {
 			<Image
 				src='/../public/images/google-icon.png'
 				alt='Google Icon'
+				width={25}
+				height={25}
+				className='m-1'
+			/>
+		)
+	} else if (name === 'YouTube') {
+		return (
+			<Image
+				src='/../public/images/youtube-icon.png'
+				alt='YouTube Icon'
 				width={25}
 				height={25}
 				className='m-1'
