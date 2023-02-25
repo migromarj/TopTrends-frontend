@@ -60,7 +60,7 @@ export default function Country() {
 			<div>
 				<Title name={name} flag={flag} />
 
-				<div className='mt-4 flex justify-around'>
+				<div className='mt-4 flex flex-wrap justify-around'>
 					{woeid && <TwitterTrends name={name} />}
 					{pn && <GoogleTrends name={name} />}
 					<div className='flex flex-col'>
@@ -145,7 +145,7 @@ function YouTubeTrends(props) {
 function dropdownMenu(handleChange) {
 	return (
 		<select
-			className='m-1 ml-2 rounded-xl bg-purple-200 p-1'
+			className='mx-3 my-2 rounded-xl bg-purple-200 p-1'
 			onChange={handleChange}
 		>
 			<option value='Default'>Default</option>
