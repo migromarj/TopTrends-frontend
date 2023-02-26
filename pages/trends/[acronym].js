@@ -61,11 +61,11 @@ export default function Country() {
 				<Title name={name} flag={flag} />
 
 				<div className='mt-4 flex flex-wrap justify-around'>
-					{woeid && <TwitterTrends name={name} />}
-					{pn && <GoogleTrends name={name} />}
+					{woeid && <TwitterTrends name={name} acronym={acronym} />}
+					{pn && <GoogleTrends name={name} acronym={acronym} />}
 					<div className='flex flex-col'>
 						{dropdownMenu(handleChange)}
-						<YouTubeTrends name={name} type={type} />
+						<YouTubeTrends name={name} acronym={acronym} type={type} />
 					</div>
 				</div>
 			</div>
@@ -90,7 +90,13 @@ function TwitterTrends(props) {
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error</p>
 
-	return <TrendsContainer name='Twitter' trends={data.countryTwitterTrends} />
+	return (
+		<TrendsContainer
+			name='Twitter'
+			acronym={props.acronym}
+			trends={data.countryTwitterTrends}
+		/>
+	)
 }
 
 function GoogleTrends(props) {
@@ -110,7 +116,13 @@ function GoogleTrends(props) {
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error</p>
 
-	return <TrendsContainer name='Google' trends={data.countryGoogleTrends} />
+	return (
+		<TrendsContainer
+			name='Google'
+			acronym={props.acronym}
+			trends={data.countryGoogleTrends}
+		/>
+	)
 }
 
 function YouTubeTrends(props) {
@@ -139,7 +151,13 @@ function YouTubeTrends(props) {
 	if (loading) return <p>Loading...</p>
 	if (error) return <p>Error</p>
 
-	return <TrendsContainer name='YouTube' trends={data.countryYouTubeTrends} />
+	return (
+		<TrendsContainer
+			name='YouTube'
+			acronym={props.acronym}
+			trends={data.countryYouTubeTrends}
+		/>
+	)
 }
 
 function dropdownMenu(handleChange) {
