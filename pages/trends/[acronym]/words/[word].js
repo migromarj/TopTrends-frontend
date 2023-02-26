@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import WordInterestGraph from '../../../../components/WordInterestGraph.jsx'
+import WordTopicsGraph from '../../../../components/WordTopicsGraph.jsx'
 import Title from '../../../../components/Title.jsx'
 
 export default function WordTrends() {
@@ -50,6 +51,12 @@ export default function WordTrends() {
 						country={countryName}
 						period={period}
 						title={`${word} ${period} interest`}
+					/>
+					<WordTopicsGraph
+						word={word}
+						country={countryName}
+						period={period}
+						title={`${word} ${period} related topics`}
 					/>
 				</div>
 			</div>
