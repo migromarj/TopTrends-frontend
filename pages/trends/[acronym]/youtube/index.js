@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import YouTubePieGraph from '../../../../components/YouTubePieGraph'
 import Title from '../../../../components/Title'
+import Earth from '../../../../components/Earth'
 
 export default function YouTubeStaistics() {
 	const router = useRouter()
@@ -19,6 +20,8 @@ export default function YouTubeStaistics() {
 			allCountries(acronym: $acronym) {
 				name
 				flag
+				lat
+				lng
 			}
 		}
 	`
@@ -52,14 +55,23 @@ export default function YouTubeStaistics() {
 		}
 		const name = data.allCountries[0].name
 		const flag = data.allCountries[0].flag
+		const lat = data.allCountries[0].lat
+		const lng = data.allCountries[0].lng
 
 		return (
-			<div className='flex flex-col'>
-				<Title name={name} flag={flag} />
-				<h1 className='text-center text-3xl font-bold'>YouTube Statistics</h1>
-				{dropdownMenu(handleChange)}
-				<div>
-					<YouTubeGraph name={name} type={type} />
+			<div>
+				<div className='fixed'>
+					<Earth autoFocus lat={lat} lng={lng} />
+				</div>
+				<div className='absolute flex w-full flex-col'>
+					<Title name={name} flag={flag} />
+					<h1 className='text-center text-3xl font-bold text-white'>
+						YouTube Statistics
+					</h1>
+					{dropdownMenu(handleChange)}
+					<div>
+						<YouTubeGraph name={name} type={type} />
+					</div>
 				</div>
 			</div>
 		)
@@ -117,7 +129,9 @@ function YouTubeGraph(props) {
 						})}
 					</div>
 					<div className='mt-5 flex w-96 flex-col lg:w-5/12'>
-						<h2 className='text-center text-xl font-bold'>Views counts</h2>
+						<h2 className='text-center text-xl font-bold text-white'>
+							Views counts
+						</h2>
 						<YouTubePieGraph
 							titles={titles}
 							values={viewCounts}
@@ -127,7 +141,9 @@ function YouTubeGraph(props) {
 				</div>
 				<div className='flex flex-col items-center justify-around lg:flex-row'>
 					<div className='mt-5 flex w-96 flex-col lg:w-5/12'>
-						<h2 className='text-center text-xl font-bold'>Likes counts</h2>
+						<h2 className='text-center text-xl font-bold text-white'>
+							Likes counts
+						</h2>
 
 						<YouTubePieGraph
 							titles={titles}
@@ -136,7 +152,9 @@ function YouTubeGraph(props) {
 						/>
 					</div>
 					<div className='mt-5 flex w-96 flex-col lg:w-5/12'>
-						<h2 className='text-center text-xl font-bold'>Comments counts</h2>
+						<h2 className='text-center text-xl font-bold text-white'>
+							Comments counts
+						</h2>
 						<YouTubePieGraph
 							titles={titles}
 							values={commentCounts}

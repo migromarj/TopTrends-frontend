@@ -3,7 +3,7 @@ import Image from 'next/image'
 export default function Title(props) {
 	return (
 		<div>
-			<div className='m-2 flex flex-row items-center'>
+			<div className='m-2 flex flex-row items-center text-white'>
 				<Image
 					src={props.flag}
 					alt={`${props.name} flag`}

@@ -2,7 +2,8 @@ import { useRouter } from 'next/router'
 import { gql, useQuery } from '@apollo/client'
 import Title from '../../components/Title.jsx'
 import TrendsContainer from '../../components/TrendsContainer.jsx'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Earth from '../../components/Earth.jsx'
 
 export default function Country() {
 	const router = useRouter()
@@ -14,6 +15,18 @@ export default function Country() {
 		setType(e.target.value)
 	}
 
+	const [visible, setVisible] = useState(false)
+
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+			setVisible(true)
+		}, 3000)
+
+		return () => {
+			clearTimeout(timeoutId)
+		}
+	}, [])
+
 	const GET_SPECIFIC_COUNTRY = gql`
 		query GetSpecificCountry($acronym: String) {
 			allCountries(acronym: $acronym) {
@@ -21,6 +34,8 @@ export default function Country() {
 				flag
 				woeid
 				pn
+				lat
+				lng
 			}
 		}
 	`
@@ -56,16 +71,28 @@ export default function Country() {
 		const flag = data.allCountries[0].flag
 		const woeid = data.allCountries[0].woeid
 		const pn = data.allCountries[0].pn
+		const lat = data.allCountries[0].lat
+		const lng = data.allCountries[0].lng
+
 		return (
 			<div>
-				<Title name={name} flag={flag} />
+				<div className='fixed'>
+					<Earth autoFocus lat={lat} lng={lng} />
+				</div>
+				<div className='absolute w-full'>
+					<Title name={name} flag={flag} />
 
-				<div className='mt-4 flex flex-wrap justify-around'>
-					{woeid && <TwitterTrends name={name} acronym={acronym} />}
-					{pn && <GoogleTrends name={name} acronym={acronym} />}
-					<div className='flex flex-col'>
-						{dropdownMenu(handleChange)}
-						<YouTubeTrends name={name} acronym={acronym} type={type} />
+					<div
+						className={`mt-4 flex flex-wrap justify-around ${
+							visible ? 'block' : 'hidden'
+						}`}
+					>
+						{woeid && <TwitterTrends name={name} acronym={acronym} />}
+						{pn && <GoogleTrends name={name} acronym={acronym} />}
+						<div className='flex flex-col'>
+							{dropdownMenu(handleChange)}
+							<YouTubeTrends name={name} acronym={acronym} type={type} />
+						</div>
 					</div>
 				</div>
 			</div>

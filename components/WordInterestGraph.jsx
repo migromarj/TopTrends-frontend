@@ -50,8 +50,10 @@ export default function WordInterestGraph(props) {
 
 	return (
 		<div className='w-full lg:w-7/12'>
-			<h1 className='my-2 text-center text-xl font-bold'>{props.title}</h1>
-			<Line data={graphData} />
+			<h1 className='my-2 text-center text-xl font-bold text-white'>
+				{props.title}
+			</h1>
+			<Line data={graphData} className='rounded-xl bg-purple-100' />
 		</div>
 	)
 }

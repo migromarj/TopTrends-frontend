@@ -21,7 +21,7 @@ export default function Earth(props) {
 				1000
 			)
 		}
-	}, [])
+	}, [props.rotate, props.autoFocus, props.lat, props.lng])
 
 	return (
 		<Globe
