@@ -27,7 +27,7 @@ export default function YouTubePieGraph(props) {
 
 	return (
 		<div>
-			<Pie data={graphData} />
+			<Pie data={graphData} className='rounded-xl bg-purple-100 p-1' />
 		</div>
 	)
 }

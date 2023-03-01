@@ -6,7 +6,7 @@ export default function TrendsContainer(props) {
 		<div className='m-3 w-96'>
 			<div className='flex items-center justify-center'>
 				{webIcon(props.name)}
-				<h2 className='text-2xl font-bold'>{props.name}</h2>
+				<h2 className='text-2xl font-bold text-white'>{props.name}</h2>
 				{props.name === 'YouTube' && (
 					<Link
 						href={`/trends/${props.acronym}/youtube`}
@@ -20,7 +20,7 @@ export default function TrendsContainer(props) {
 				{props.trends.map((trend, index) => (
 					<div
 						key={trend.id}
-						className='m-1 rounded-xl bg-purple-100 bg-opacity-20 p-2 text-center'
+						className='m-1 rounded-xl bg-purple-100 bg-opacity-20 p-2 text-center text-white'
 					>
 						<Link
 							href={`/trends/${props.acronym}/words/${

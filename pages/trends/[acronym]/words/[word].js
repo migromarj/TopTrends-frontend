@@ -4,6 +4,7 @@ import { gql, useQuery } from '@apollo/client'
 import WordInterestGraph from '../../../../components/WordInterestGraph.jsx'
 import WordTopicsGraph from '../../../../components/WordTopicsGraph.jsx'
 import Title from '../../../../components/Title.jsx'
+import Earth from '../../../../components/Earth.jsx'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -21,6 +22,8 @@ export default function WordTrends() {
 			allCountries(acronym: $acronym) {
 				name
 				flag
+				lat
+				lng
 			}
 		}
 	`
@@ -40,24 +43,31 @@ export default function WordTrends() {
 	if (data) {
 		const countryName = data.allCountries[0].name
 		const flag = data.allCountries[0].flag
+		const lat = data.allCountries[0].lat
+		const lng = data.allCountries[0].lng
 
 		return (
 			<div>
-				<Title name={countryName} flag={flag} />
-				{dropdownMenu(handleChange)}
-				<div className='flex flex-col items-center justify-around lg:flex-row'>
-					<WordInterestGraph
-						word={word}
-						country={countryName}
-						period={period}
-						title={`${word} ${period} interest`}
-					/>
-					<WordTopicsGraph
-						word={word}
-						country={countryName}
-						period={period}
-						title={`${word} ${period} related topics`}
-					/>
+				<div className='fixed'>
+					<Earth autoFocus lat={lat} lng={lng} />
+				</div>
+				<div className='absolute w-full'>
+					<Title name={countryName} flag={flag} />
+					{dropdownMenu(handleChange)}
+					<div className='flex flex-col items-center justify-around lg:flex-row'>
+						<WordInterestGraph
+							word={word}
+							country={countryName}
+							period={period}
+							title={`${word} ${period} interest`}
+						/>
+						<WordTopicsGraph
+							word={word}
+							country={countryName}
+							period={period}
+							title={`${word} ${period} related topics`}
+						/>
+					</div>
 				</div>
 			</div>
 		)
@@ -66,7 +76,7 @@ export default function WordTrends() {
 
 function dropdownMenu(handleChange) {
 	return (
-		<div className='flex w-screen justify-center'>
+		<div className='flex w-full justify-center'>
 			<select
 				className='my-5 rounded-xl bg-purple-200 p-3'
 				onChange={handleChange}
