@@ -5,6 +5,8 @@ import WordInterestGraph from '../../../../components/WordInterestGraph.jsx'
 import WordTopicsGraph from '../../../../components/WordTopicsGraph.jsx'
 import Title from '../../../../components/Title.jsx'
 import Earth from '../../../../components/Earth.jsx'
+import Loading from '../../../../components/Loading.jsx'
+import Error from '../../../../components/Error.jsx'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -33,11 +35,11 @@ export default function WordTrends() {
 	})
 
 	if (loading) {
-		;<h1>Loading...</h1>
+		return <Loading background />
 	}
 
 	if (error) {
-		;<h1>Error</h1>
+		return <Error background />
 	}
 
 	if (data) {
@@ -59,13 +61,13 @@ export default function WordTrends() {
 							word={word}
 							country={countryName}
 							period={period}
-							title={`${word} ${period} interest`}
+							title={`${word}`}
 						/>
 						<WordTopicsGraph
 							word={word}
 							country={countryName}
 							period={period}
-							title={`${word} ${period} related topics`}
+							title={`${word}`}
 						/>
 					</div>
 				</div>

@@ -4,6 +4,8 @@ import { gql, useQuery } from '@apollo/client'
 import YouTubePieGraph from '../../../../components/YouTubePieGraph'
 import Title from '../../../../components/Title'
 import Earth from '../../../../components/Earth'
+import Loading from '../../../../components/Loading'
+import Error from '../../../../components/Error.jsx'
 
 export default function YouTubeStaistics() {
 	const router = useRouter()
@@ -31,19 +33,11 @@ export default function YouTubeStaistics() {
 	})
 
 	if (loading) {
-		return (
-			<div>
-				<h1>Loading...</h1>
-			</div>
-		)
+		return <Loading background />
 	}
 
 	if (error) {
-		return (
-			<div>
-				<h1>Error</h1>
-			</div>
-		)
+		return <Error background />
 	}
 	if (data) {
 		if (data.allCountries.length === 0) {
@@ -103,8 +97,8 @@ function YouTubeGraph(props) {
 		variables: { country: props.name, trendType: props.type, trendsNumber: 5 },
 	})
 
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error</p>
+	if (loading) return <Loading />
+	if (error) return <Error />
 
 	if (data) {
 		const staistics = getStaistics(data)

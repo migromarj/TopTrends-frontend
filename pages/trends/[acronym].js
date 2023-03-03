@@ -4,6 +4,10 @@ import Title from '../../components/Title.jsx'
 import TrendsContainer from '../../components/TrendsContainer.jsx'
 import { useState, useEffect } from 'react'
 import Earth from '../../components/Earth.jsx'
+import Loading from '../../components/Loading.jsx'
+import Error from '../../components/Error.jsx'
+import Link from 'next/link'
+import WebIcon from '../../components/WebIcon.jsx'
 
 export default function Country() {
 	const router = useRouter()
@@ -45,19 +49,11 @@ export default function Country() {
 	})
 
 	if (loading) {
-		return (
-			<div>
-				<h1>Loading...</h1>
-			</div>
-		)
+		return <Loading background />
 	}
 
 	if (error) {
-		return (
-			<div>
-				<h1>Error</h1>
-			</div>
-		)
+		return <Error background />
 	}
 	if (data) {
 		if (data.allCountries.length === 0) {
@@ -90,6 +86,17 @@ export default function Country() {
 						{woeid && <TwitterTrends name={name} acronym={acronym} />}
 						{pn && <GoogleTrends name={name} acronym={acronym} />}
 						<div className='flex flex-col'>
+							<div className='m-3 flex items-center justify-center'>
+								<WebIcon name='YouTube' />
+								<h2 className='text-2xl font-bold text-white'>YouTube</h2>
+
+								<Link
+									href={`/trends/${acronym}/youtube`}
+									className='ml-2 text-blue-500'
+								>
+									More info
+								</Link>
+							</div>
 							{dropdownMenu(handleChange)}
 							<YouTubeTrends name={name} acronym={acronym} type={type} />
 						</div>
@@ -114,9 +121,8 @@ function TwitterTrends(props) {
 		variables: { country: props.name, trendsNumber: 10 },
 	})
 
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error</p>
-
+	if (loading) return <Loading container />
+	if (error) return <Error container />
 	return (
 		<TrendsContainer
 			name='Twitter'
@@ -140,8 +146,8 @@ function GoogleTrends(props) {
 		variables: { country: props.name, trendsNumber: 10 },
 	})
 
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error</p>
+	if (loading) return <Loading container />
+	if (error) return <Error container />
 
 	return (
 		<TrendsContainer
@@ -175,8 +181,8 @@ function YouTubeTrends(props) {
 		variables: { country: props.name, trendType: props.type, trendsNumber: 10 },
 	})
 
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error</p>
+	if (loading) return <Loading container />
+	if (error) return <Error container />
 
 	return (
 		<TrendsContainer

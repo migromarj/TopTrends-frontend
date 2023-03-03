@@ -2,6 +2,8 @@ import { CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
 import { gql, useQuery } from '@apollo/client'
 import { Line } from 'react-chartjs-2'
+import Loading from './Loading'
+import Error from './Error'
 
 export default function WordInterestGraph(props) {
 	const GET_WORD_INTEREST = gql`
@@ -30,10 +32,22 @@ export default function WordInterestGraph(props) {
 		},
 	})
 
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error</p>
-
 	Chart.register(CategoryScale)
+
+	if (loading || error) {
+		return (
+			<div>
+				<div className='w-full lg:w-7/12'>
+					<h1 className='my-2 text-center text-xl font-bold '>
+						<span className='text-purple-400'>{props.title} </span>
+						<span className='text-white'>interest</span>
+					</h1>
+					{loading && <Loading />}
+					{error && <Error />}
+				</div>
+			</div>
+		)
+	}
 
 	const graphData = {
 		labels: data.wordGoogleTrends.map(trend => parseDate(trend.trendDatetime)),
@@ -50,8 +64,9 @@ export default function WordInterestGraph(props) {
 
 	return (
 		<div className='w-full lg:w-7/12'>
-			<h1 className='my-2 text-center text-xl font-bold text-white'>
-				{props.title}
+			<h1 className='my-2 text-center text-xl font-bold '>
+				<span className='text-purple-400'>{props.title} </span>
+				<span className='text-white'>interest</span>
 			</h1>
 			<Line data={graphData} className='rounded-xl bg-purple-100' />
 		</div>
