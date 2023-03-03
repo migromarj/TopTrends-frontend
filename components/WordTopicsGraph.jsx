@@ -2,6 +2,8 @@ import { CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
 import { gql, useQuery } from '@apollo/client'
 import { Pie } from 'react-chartjs-2'
+import Loading from './Loading'
+import Error from './Error'
 
 export default function WordTopicsGraph(props) {
 	const GET_WORD_TOPICS = gql`
@@ -34,8 +36,20 @@ export default function WordTopicsGraph(props) {
 		},
 	})
 
-	if (loading) return <p>Loading...</p>
-	if (error) return <p>Error</p>
+	if (loading || error) {
+		return (
+			<div>
+				<div className='w-full lg:w-4/12'>
+					<h1 className='my-2 text-center text-xl font-bold '>
+						<span className='text-purple-400'>{props.title} </span>
+						<span className='text-white'>related topics</span>
+					</h1>
+					{loading && <Loading />}
+					{error && <Error />}
+				</div>
+			</div>
+		)
+	}
 
 	Chart.register(CategoryScale)
 
@@ -67,9 +81,10 @@ export default function WordTopicsGraph(props) {
 	}
 
 	return (
-		<div className='w-full lg:w-80'>
-			<h1 className='my-2 text-center text-xl font-bold text-white'>
-				{props.title}
+		<div className='w-full lg:w-4/12'>
+			<h1 className='my-2 text-center text-xl font-bold'>
+				<span className='text-purple-400'>{props.title} </span>
+				<span className='text-white'>related topics</span>
 			</h1>
 			<Pie data={graphData} className='rounded-xl bg-purple-100 p-1' />
 		</div>
