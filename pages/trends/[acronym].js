@@ -8,6 +8,7 @@ import Loading from '../../components/Loading.jsx'
 import Error from '../../components/Error.jsx'
 import Link from 'next/link'
 import WebIcon from '../../components/WebIcon.jsx'
+import Footer from '../../components/Footer.jsx'
 
 export default function Country() {
 	const router = useRouter()
@@ -101,6 +102,9 @@ export default function Country() {
 							<YouTubeTrends name={name} acronym={acronym} type={type} />
 						</div>
 					</div>
+					<div className={`${visible ? 'block' : 'hidden'}`}>
+						<Footer />
+					</div>
 				</div>
 			</div>
 		)
@@ -121,8 +125,8 @@ function TwitterTrends(props) {
 		variables: { country: props.name, trendsNumber: 10 },
 	})
 
-	if (loading) return <Loading container />
-	if (error) return <Error container />
+	if (loading) return <Loading container name='Twitter' />
+	if (error) return <Error container name='Twitter' />
 	return (
 		<TrendsContainer
 			name='Twitter'
@@ -146,8 +150,8 @@ function GoogleTrends(props) {
 		variables: { country: props.name, trendsNumber: 10 },
 	})
 
-	if (loading) return <Loading container />
-	if (error) return <Error container />
+	if (loading) return <Loading container name='Google' />
+	if (error) return <Error container name='Google' />
 
 	return (
 		<TrendsContainer
