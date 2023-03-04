@@ -7,6 +7,7 @@ import Earth from '../../../../components/Earth'
 import Loading from '../../../../components/Loading'
 import Error from '../../../../components/Error.jsx'
 import Footer from '../../../../components/Footer.jsx'
+import Head from 'next/head.js'
 
 export default function YouTubeStaistics() {
 	const router = useRouter()
@@ -55,20 +56,27 @@ export default function YouTubeStaistics() {
 
 		return (
 			<div>
-				<div className='fixed'>
-					<Earth autoFocus lat={lat} lng={lng} />
-				</div>
-				<div className='absolute flex w-full flex-col'>
-					<Title name={name} flag={flag} />
-					<h1 className='text-center text-3xl font-bold text-white'>
-						YouTube Statistics
-					</h1>
-					{dropdownMenu(handleChange)}
+				<Head>
+					<title>TopTrends | {name} | YouTube</title>
+				</Head>
+				<main>
 					<div>
-						<YouTubeGraph name={name} type={type} />
+						<div className='fixed'>
+							<Earth autoFocus lat={lat} lng={lng} />
+						</div>
+						<div className='absolute flex w-full flex-col'>
+							<Title name={name} flag={flag} code={acronym} />
+							<h1 className='text-center text-3xl font-bold text-white'>
+								YouTube Statistics
+							</h1>
+							{dropdownMenu(handleChange)}
+							<div>
+								<YouTubeGraph name={name} type={type} />
+							</div>
+							<Footer />
+						</div>
 					</div>
-					<Footer />
-				</div>
+				</main>
 			</div>
 		)
 	}

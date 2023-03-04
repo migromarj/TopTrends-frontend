@@ -8,6 +8,7 @@ import Earth from '../../../../components/Earth.jsx'
 import Loading from '../../../../components/Loading.jsx'
 import Error from '../../../../components/Error.jsx'
 import Footer from '../../../../components/Footer.jsx'
+import Head from 'next/head.js'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -51,28 +52,37 @@ export default function WordTrends() {
 
 		return (
 			<div>
-				<div className='fixed'>
-					<Earth autoFocus lat={lat} lng={lng} />
-				</div>
-				<div className='absolute w-full'>
-					<Title name={countryName} flag={flag} />
-					{dropdownMenu(handleChange)}
-					<div className='flex flex-col items-center justify-around lg:flex-row'>
-						<WordInterestGraph
-							word={word}
-							country={countryName}
-							period={period}
-							title={`${word}`}
-						/>
-						<WordTopicsGraph
-							word={word}
-							country={countryName}
-							period={period}
-							title={`${word}`}
-						/>
+				<Head>
+					<title>
+						TopTrends | {countryName} | {word}
+					</title>
+				</Head>
+				<main>
+					<div>
+						<div className='fixed'>
+							<Earth autoFocus lat={lat} lng={lng} />
+						</div>
+						<div className='absolute w-full'>
+							<Title name={countryName} flag={flag} code={acronym} />
+							{dropdownMenu(handleChange)}
+							<div className='flex flex-col items-center justify-around lg:flex-row'>
+								<WordInterestGraph
+									word={word}
+									country={countryName}
+									period={period}
+									title={`${word}`}
+								/>
+								<WordTopicsGraph
+									word={word}
+									country={countryName}
+									period={period}
+									title={`${word}`}
+								/>
+							</div>
+							<Footer />
+						</div>
 					</div>
-					<Footer />
-				</div>
+				</main>
 			</div>
 		)
 	}
