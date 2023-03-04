@@ -1,12 +1,33 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import NavBar from './NavBar'
 
 export default function Title(props) {
+	const path = window.location.pathname
+
+	const getPreviousPage = () => {
+		if (/^\/trends\/[a-zA-Z]{2}$/.test(path)) {
+			return '/'
+		} else if (/^\/trends\/[a-zA-Z]{2}\/words\/.+/.test(path)) {
+			return `/trends/${props.code}`
+		} else if (/^\/trends\/[a-zA-Z]{2}\/youtube$/.test(path)) {
+			return `/trends/${props.code}`
+		} else {
+			return '/'
+		}
+	}
+
 	return (
 		<div className='flex flex-col'>
 			<NavBar />
 			<div className='mt-16'>
 				<div className='m-2 flex flex-row items-center text-white'>
+					<Link
+						href={getPreviousPage()}
+						className='m-2 rounded-xl bg-purple-800 px-2 pb-1 text-5xl'
+					>
+						&lt;
+					</Link>
 					<Image
 						src={props.flag}
 						alt={`${props.name} flag`}

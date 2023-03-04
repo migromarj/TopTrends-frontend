@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { gql, useQuery } from '@apollo/client'
 import Title from '../../components/Title.jsx'
@@ -73,39 +74,46 @@ export default function Country() {
 
 		return (
 			<div>
-				<div className='fixed'>
-					<Earth autoFocus lat={lat} lng={lng} />
-				</div>
-				<div className='absolute w-full'>
-					<Title name={name} flag={flag} />
+				<Head>
+					<title>TopTrends | {name}</title>
+				</Head>
+				<main>
+					<div>
+						<div className='fixed'>
+							<Earth autoFocus lat={lat} lng={lng} />
+						</div>
+						<div className='absolute w-full'>
+							<Title name={name} flag={flag} />
 
-					<div
-						className={`mt-4 flex flex-wrap justify-around ${
-							visible ? 'block' : 'hidden'
-						}`}
-					>
-						{woeid && <TwitterTrends name={name} acronym={acronym} />}
-						{pn && <GoogleTrends name={name} acronym={acronym} />}
-						<div className='flex flex-col'>
-							<div className='m-3 flex items-center justify-center'>
-								<WebIcon name='YouTube' />
-								<h2 className='text-2xl font-bold text-white'>YouTube</h2>
+							<div
+								className={`mt-4 flex flex-wrap justify-around ${
+									visible ? 'block' : 'hidden'
+								}`}
+							>
+								{woeid && <TwitterTrends name={name} acronym={acronym} />}
+								{pn && <GoogleTrends name={name} acronym={acronym} />}
+								<div className='flex flex-col'>
+									<div className='m-3 flex items-center justify-center'>
+										<WebIcon name='YouTube' />
+										<h2 className='text-2xl font-bold text-white'>YouTube</h2>
 
-								<Link
-									href={`/trends/${acronym}/youtube`}
-									className='ml-2 text-blue-500'
-								>
-									More info
-								</Link>
+										<Link
+											href={`/trends/${acronym}/youtube`}
+											className='ml-2 text-blue-500'
+										>
+											More info
+										</Link>
+									</div>
+									{dropdownMenu(handleChange)}
+									<YouTubeTrends name={name} acronym={acronym} type={type} />
+								</div>
 							</div>
-							{dropdownMenu(handleChange)}
-							<YouTubeTrends name={name} acronym={acronym} type={type} />
+							<div className={`${visible ? 'block' : 'hidden'}`}>
+								<Footer />
+							</div>
 						</div>
 					</div>
-					<div className={`${visible ? 'block' : 'hidden'}`}>
-						<Footer />
-					</div>
-				</div>
+				</main>
 			</div>
 		)
 	}

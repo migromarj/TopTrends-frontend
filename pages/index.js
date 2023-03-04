@@ -8,7 +8,7 @@ export default function Home() {
 	return (
 		<div>
 			<Head>
-				<title>Home</title>
+				<title>TopTrends | Home</title>
 			</Head>
 			<main>
 				<NavBar />
