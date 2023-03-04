@@ -10,7 +10,11 @@ export default function TrendsContainer(props) {
 					<h2 className='text-2xl font-bold text-white'>{props.name}</h2>
 				</div>
 			)}
-			<div className='rounded-xl bg-purple-400 bg-opacity-20 p-3'>
+			<div
+				className={`overflow-auto rounded-xl bg-purple-400 bg-opacity-20 p-3 ${
+					props.name === 'YouTube' ? 'h-80' : 'h-96'
+				}`}
+			>
 				{props.trends.map((trend, index) => (
 					<div
 						key={trend.id}
