@@ -7,6 +7,7 @@ import Title from '../../../../components/Title.jsx'
 import Earth from '../../../../components/Earth.jsx'
 import Loading from '../../../../components/Loading.jsx'
 import Error from '../../../../components/Error.jsx'
+import Footer from '../../../../components/Footer.jsx'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -70,6 +71,7 @@ export default function WordTrends() {
 							title={`${word}`}
 						/>
 					</div>
+					<Footer />
 				</div>
 			</div>
 		)

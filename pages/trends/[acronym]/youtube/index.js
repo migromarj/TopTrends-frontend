@@ -6,6 +6,7 @@ import Title from '../../../../components/Title'
 import Earth from '../../../../components/Earth'
 import Loading from '../../../../components/Loading'
 import Error from '../../../../components/Error.jsx'
+import Footer from '../../../../components/Footer.jsx'
 
 export default function YouTubeStaistics() {
 	const router = useRouter()
@@ -66,6 +67,7 @@ export default function YouTubeStaistics() {
 					<div>
 						<YouTubeGraph name={name} type={type} />
 					</div>
+					<Footer />
 				</div>
 			</div>
 		)

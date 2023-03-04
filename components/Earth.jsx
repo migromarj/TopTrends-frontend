@@ -1,4 +1,5 @@
 import { useRef, useEffect } from 'react'
+import Footer from './Footer'
 
 let Globe = () => null
 if (typeof window !== 'undefined') Globe = require('react-globe.gl').default
@@ -24,11 +25,14 @@ export default function Earth(props) {
 	}, [props.rotate, props.autoFocus, props.lat, props.lng])
 
 	return (
-		<Globe
-			ref={globeE1}
-			globeImageUrl='//unpkg.com/three-globe/example/img/earth-night.jpg'
-			bumpImageUrl='//unpkg.com/three-globe/example/img/earth-topology.png'
-			backgroundImageUrl='//unpkg.com/three-globe/example/img/night-sky.png'
-		/>
+		<span>
+			<Globe
+				ref={globeE1}
+				globeImageUrl='//unpkg.com/three-globe/example/img/earth-night.jpg'
+				bumpImageUrl='//unpkg.com/three-globe/example/img/earth-topology.png'
+				backgroundImageUrl='//unpkg.com/three-globe/example/img/night-sky.png'
+			/>
+			{props.rotate && <Footer absolute />}
+		</span>
 	)
 }

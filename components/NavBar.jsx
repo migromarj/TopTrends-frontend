@@ -1,0 +1,21 @@
+import Image from 'next/image'
+import Link from 'next/link'
+
+export default function NavBar() {
+	return (
+		<div className='h-15 absolute z-30 flex w-full items-center justify-center text-white'>
+			<Link href='/' className='flex items-center py-2'>
+				<Image
+					src='/../public/images/web-icon.png'
+					alt='Web icon'
+					width={50}
+					height={50}
+					className=''
+				/>
+				<h1 className='ml-2 select-none font-signature text-6xl font-bold'>
+					TopTrends
+				</h1>
+			</Link>
+		</div>
+	)
+}
