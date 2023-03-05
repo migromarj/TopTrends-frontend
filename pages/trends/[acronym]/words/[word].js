@@ -8,6 +8,7 @@ import Earth from '../../../../components/Earth.jsx'
 import Loading from '../../../../components/Loading.jsx'
 import Error from '../../../../components/Error.jsx'
 import Footer from '../../../../components/Footer.jsx'
+import Country404 from '../../../../components/Country404.jsx'
 import Head from 'next/head.js'
 
 export default function WordTrends() {
@@ -37,14 +38,35 @@ export default function WordTrends() {
 	})
 
 	if (loading) {
-		return <Loading background />
+		return (
+			<div>
+				<Head>
+					<title>TopTrends | Error | {word}</title>
+				</Head>
+				<main>
+					<Loading background />
+				</main>
+			</div>
+		)
 	}
 
 	if (error) {
-		return <Error background />
+		return (
+			<div>
+				<Head>
+					<title>TopTrends | Error | {word}</title>
+				</Head>
+				<main>
+					<Error background />
+				</main>
+			</div>
+		)
 	}
 
 	if (data) {
+		if (data.allCountries.length === 0) {
+			return <Country404 />
+		}
 		const countryName = data.allCountries[0].name
 		const flag = data.allCountries[0].flag
 		const lat = data.allCountries[0].lat

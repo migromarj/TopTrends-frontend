@@ -10,6 +10,7 @@ import Error from '../../components/Error.jsx'
 import Link from 'next/link'
 import WebIcon from '../../components/WebIcon.jsx'
 import Footer from '../../components/Footer.jsx'
+import Country404 from '../../components/Country404.jsx'
 
 export default function Country() {
 	const router = useRouter()
@@ -51,19 +52,33 @@ export default function Country() {
 	})
 
 	if (loading) {
-		return <Loading background />
+		return (
+			<div>
+				<Head>
+					<title>TopTrends | Error</title>
+				</Head>
+				<main>
+					<Loading background />
+				</main>
+			</div>
+		)
 	}
 
 	if (error) {
-		return <Error background />
+		return (
+			<div>
+				<Head>
+					<title>TopTrends | Error</title>
+				</Head>
+				<main>
+					<Error background />
+				</main>
+			</div>
+		)
 	}
 	if (data) {
 		if (data.allCountries.length === 0) {
-			return (
-				<div>
-					<h1>Country not found</h1>
-				</div>
-			)
+			return <Country404 />
 		}
 		const name = data.allCountries[0].name
 		const flag = data.allCountries[0].flag

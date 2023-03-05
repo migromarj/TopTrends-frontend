@@ -39,7 +39,7 @@ export default function WordTopicsGraph(props) {
 	if (loading || error) {
 		return (
 			<div>
-				<div className='w-full lg:w-4/12'>
+				<div className='flex w-full flex-col justify-center lg:w-4/12'>
 					<h1 className='my-2 text-center text-xl font-bold '>
 						<span className='text-purple-400'>{props.title} </span>
 						<span className='text-white'>related topics</span>
@@ -81,12 +81,19 @@ export default function WordTopicsGraph(props) {
 	}
 
 	return (
-		<div className='w-full lg:w-4/12'>
+		<div className='flex w-full flex-col justify-center lg:w-4/12'>
 			<h1 className='my-2 text-center text-xl font-bold'>
 				<span className='text-purple-400'>{props.title} </span>
 				<span className='text-white'>related topics</span>
 			</h1>
-			<Pie data={graphData} className='rounded-xl bg-purple-100 p-1' />
+			{data.wordRelatedTopics.length === 0 && (
+				<div className='flex justify-center'>
+					<Error />
+				</div>
+			)}
+			{data.wordRelatedTopics.length > 0 && (
+				<Pie data={graphData} className='rounded-xl bg-purple-100 p-1' />
+			)}
 		</div>
 	)
 }
