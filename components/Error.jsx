@@ -26,9 +26,10 @@ export default function Error(props) {
 					<Image
 						src='/../public/images/error-icon.png'
 						alt='Error'
-						width={200}
-						height={200}
+						width={40}
+						height={40}
 					/>
+					<h1 className='text-3xl font-bold text-white'>Data not found</h1>
 				</div>
 			</div>
 		</div>

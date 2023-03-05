@@ -37,7 +37,7 @@ export default function WordInterestGraph(props) {
 	if (loading || error) {
 		return (
 			<div>
-				<div className='w-full lg:w-7/12'>
+				<div className='flex w-full flex-col justify-center lg:w-7/12'>
 					<h1 className='my-2 text-center text-xl font-bold '>
 						<span className='text-purple-400'>{props.title} </span>
 						<span className='text-white'>interest</span>
@@ -63,12 +63,19 @@ export default function WordInterestGraph(props) {
 	}
 
 	return (
-		<div className='w-full lg:w-7/12'>
+		<div className='flex w-full flex-col justify-center lg:w-7/12'>
 			<h1 className='my-2 text-center text-xl font-bold '>
 				<span className='text-purple-400'>{props.title} </span>
 				<span className='text-white'>interest</span>
 			</h1>
-			<Line data={graphData} className='rounded-xl bg-purple-100' />
+			{data.wordGoogleTrends.length === 0 && (
+				<div className='flex justify-center'>
+					<Error />
+				</div>
+			)}
+			{data.wordGoogleTrends.length > 0 && (
+				<Line data={graphData} className='rounded-xl bg-purple-100' />
+			)}
 		</div>
 	)
 }
