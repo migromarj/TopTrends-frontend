@@ -4,6 +4,7 @@ export default function Footer(props) {
 
 	return (
 		<div
+			id='footer'
 			className={`flex items-start justify-center shadow ${
 				props.absolute ? 'absolute bottom-0 w-full' : 'pt-12 pb-4'
 			}`}

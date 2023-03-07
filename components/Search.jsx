@@ -7,7 +7,7 @@ import Image from 'next/image'
 const AutocompleteItem = ({ name, acronym, flag, woeid, pn }) => {
 	return (
 		<li className='m-1 rounded-xl border-2 border-black bg-purple-200'>
-			<Link href={`/trends/${acronym}`}>
+			<Link id={`search-${acronym}`} href={`/trends/${acronym}`}>
 				<div className='m-2 flex gap-4'>
 					<div className='flex items-center'>
 						<Image
@@ -134,7 +134,7 @@ export default function Search(props) {
 							const { items } = collection
 
 							return (
-								<section key={`section-${index}`}>
+								<section id='countryList' key={`section-${index}`}>
 									{items.length > 0 && (
 										<ul {...autocomplete.getListProps()}>
 											{items.map(item => (
