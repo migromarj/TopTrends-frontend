@@ -4,6 +4,7 @@ export default function WebIcon(props) {
 	if (props.name === 'Twitter') {
 		return (
 			<Image
+				id='twitter-icon'
 				src='/../public/images/twitter-icon.png'
 				alt='Twitter Icon'
 				width={25}
@@ -14,6 +15,7 @@ export default function WebIcon(props) {
 	} else if (props.name === 'Google') {
 		return (
 			<Image
+				id='google-icon'
 				src='/../public/images/google-icon.png'
 				alt='Google Icon'
 				width={25}
@@ -24,6 +26,7 @@ export default function WebIcon(props) {
 	} else if (props.name === 'YouTube') {
 		return (
 			<Image
+				id='youtube-icon'
 				src='/../public/images/youtube-icon.png'
 				alt='YouTube Icon'
 				width={25}

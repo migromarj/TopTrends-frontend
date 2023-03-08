@@ -108,11 +108,20 @@ export default function Country() {
 								{woeid && <TwitterTrends name={name} acronym={acronym} />}
 								{pn && <GoogleTrends name={name} acronym={acronym} />}
 								<div className='flex flex-col'>
-									<div className='m-3 flex items-center justify-center'>
+									<div
+										id='YouTube-title-container'
+										className='m-3 flex items-center justify-center'
+									>
 										<WebIcon name='YouTube' />
-										<h2 className='text-2xl font-bold text-white'>YouTube</h2>
+										<h2
+											id='YouTube-title'
+											className='text-2xl font-bold text-white'
+										>
+											YouTube
+										</h2>
 
 										<Link
+											id='YouTube-more-info'
 											href={`/trends/${acronym}/youtube`}
 											className='ml-2 text-blue-500'
 										>
@@ -223,6 +232,7 @@ function YouTubeTrends(props) {
 function dropdownMenu(handleChange) {
 	return (
 		<select
+			id='dropdownYouTube'
 			className='mx-3 my-2 rounded-xl bg-purple-200 p-1'
 			onChange={handleChange}
 		>

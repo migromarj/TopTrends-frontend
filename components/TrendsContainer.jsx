@@ -3,11 +3,19 @@ import WebIcon from './WebIcon'
 
 export default function TrendsContainer(props) {
 	return (
-		<div className='m-3 w-96'>
+		<div id={`container-${props.name}`} className='m-3 w-96'>
 			{props.name !== 'YouTube' && (
-				<div className='flex items-center justify-center'>
+				<div
+					id={`${props.name}-title-container`}
+					className='flex items-center justify-center'
+				>
 					<WebIcon name={props.name} />
-					<h2 className='text-2xl font-bold text-white'>{props.name}</h2>
+					<h2
+						id={`${props.name}-title`}
+						className='text-2xl font-bold text-white'
+					>
+						{props.name}
+					</h2>
 				</div>
 			)}
 			<div
@@ -21,6 +29,7 @@ export default function TrendsContainer(props) {
 						className='m-1 rounded-xl bg-purple-100 bg-opacity-20 p-2 text-center text-white'
 					>
 						<Link
+							id={`${props.name}-trend-${index + 1}`}
 							href={`/trends/${props.acronym}/words/${
 								typeof trend.name === 'string' ? parseTrendName(trend.name) : ''
 							}`}
@@ -32,7 +41,7 @@ export default function TrendsContainer(props) {
 							)}
 						</Link>
 						{props.name === 'YouTube' && (
-							<div>
+							<div id={`${props.name}-Trend-${index + 1}`}>
 								#{index + 1} - {trend.title}
 							</div>
 						)}
