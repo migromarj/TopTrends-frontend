@@ -81,8 +81,11 @@ export default function WordTopicsGraph(props) {
 	}
 
 	return (
-		<div className='flex w-full flex-col justify-center lg:w-4/12'>
-			<h1 className='my-2 text-center text-xl font-bold'>
+		<div
+			id='topics-container'
+			className='flex w-full flex-col justify-center lg:w-4/12'
+		>
+			<h1 id='topics-text' className='my-2 text-center text-xl font-bold'>
 				<span className='text-purple-400'>{props.title} </span>
 				<span className='text-white'>related topics</span>
 			</h1>
@@ -92,7 +95,11 @@ export default function WordTopicsGraph(props) {
 				</div>
 			)}
 			{data.wordRelatedTopics.length > 0 && (
-				<Pie data={graphData} className='rounded-xl bg-purple-100 p-1' />
+				<Pie
+					id='wordTopicsGraph'
+					data={graphData}
+					className='rounded-xl bg-purple-100 p-1'
+				/>
 			)}
 		</div>
 	)

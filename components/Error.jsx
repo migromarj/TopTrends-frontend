@@ -16,7 +16,7 @@ export default function Error(props) {
 	}
 
 	return (
-		<div className='m-3 w-96'>
+		<div id='error-container' className='m-3 w-96'>
 			<div className='flex items-center justify-center'>
 				<WebIcon name={props.name} />
 				<h2 className='text-2xl font-bold text-white'>{props.name}</h2>
@@ -24,12 +24,15 @@ export default function Error(props) {
 			<div className='rounded-xl bg-purple-400 bg-opacity-20 p-3'>
 				<div className='flex items-center justify-center'>
 					<Image
+						id='errorIcon'
 						src='/../public/images/error-icon.png'
 						alt='Error'
 						width={40}
 						height={40}
 					/>
-					<h1 className='text-3xl font-bold text-white'>Data not found</h1>
+					<h1 id='error-text' className='text-3xl font-bold text-white'>
+						Data not found
+					</h1>
 				</div>
 			</div>
 		</div>

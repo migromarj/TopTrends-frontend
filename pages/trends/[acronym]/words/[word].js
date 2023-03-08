@@ -87,7 +87,10 @@ export default function WordTrends() {
 						<div className='absolute w-full'>
 							<Title name={countryName} flag={flag} code={acronym} />
 							{dropdownMenu(handleChange)}
-							<div className='flex flex-col items-center justify-around lg:flex-row'>
+							<div
+								id='word-graphs'
+								className='flex flex-col items-center justify-around lg:flex-row'
+							>
 								<WordInterestGraph
 									word={word}
 									country={countryName}
@@ -114,6 +117,7 @@ function dropdownMenu(handleChange) {
 	return (
 		<div className='flex w-full justify-center'>
 			<select
+				id='period-dropdown'
 				className='my-5 rounded-xl bg-purple-200 p-3'
 				onChange={handleChange}
 			>

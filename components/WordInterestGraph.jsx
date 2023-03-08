@@ -63,8 +63,11 @@ export default function WordInterestGraph(props) {
 	}
 
 	return (
-		<div className='flex w-full flex-col justify-center lg:w-7/12'>
-			<h1 className='my-2 text-center text-xl font-bold '>
+		<div
+			id='interest-container'
+			className='flex w-full flex-col justify-center lg:w-7/12'
+		>
+			<h1 id='interest-text' className='my-2 text-center text-xl font-bold '>
 				<span className='text-purple-400'>{props.title} </span>
 				<span className='text-white'>interest</span>
 			</h1>
@@ -74,7 +77,11 @@ export default function WordInterestGraph(props) {
 				</div>
 			)}
 			{data.wordGoogleTrends.length > 0 && (
-				<Line data={graphData} className='rounded-xl bg-purple-100' />
+				<Line
+					id='wordInterestGraph'
+					data={graphData}
+					className='rounded-xl bg-purple-100'
+				/>
 			)}
 		</div>
 	)
