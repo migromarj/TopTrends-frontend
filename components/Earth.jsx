@@ -25,7 +25,7 @@ export default function Earth(props) {
 	}, [props.rotate, props.autoFocus, props.lat, props.lng])
 
 	return (
-		<span>
+		<span id='background'>
 			<Globe
 				ref={globeE1}
 				globeImageUrl='//unpkg.com/three-globe/example/img/earth-night.jpg'

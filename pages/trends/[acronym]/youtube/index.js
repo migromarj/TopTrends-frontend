@@ -81,7 +81,10 @@ export default function YouTubeStaistics() {
 						</div>
 						<div className='absolute flex w-full flex-col'>
 							<Title name={name} flag={flag} code={acronym} />
-							<h1 className='text-center text-3xl font-bold text-white'>
+							<h1
+								id='statistics-title'
+								className='text-center text-3xl font-bold text-white'
+							>
 								YouTube Statistics
 							</h1>
 							{dropdownMenu(handleChange)}
@@ -134,12 +137,19 @@ function YouTubeGraph(props) {
 		const commentCounts = staistics[3]
 
 		return (
-			<div>
+			<div id='graphs-container'>
 				<div className='flex flex-col items-center justify-around lg:flex-row'>
-					<div className='mx-10 flex w-80 flex-col rounded-xl bg-purple-400 p-2'>
+					<div
+						id='yt-trends-container'
+						className='mx-10 flex w-80 flex-col rounded-xl bg-purple-400 p-2'
+					>
 						{titles.map((title, index) => {
 							return (
-								<div key={index} className='m-2 rounded-xl bg-purple-200 p-2'>
+								<div
+									id={`yt-trend-${index + 1}`}
+									key={index}
+									className='m-2 rounded-xl bg-purple-200 p-2'
+								>
 									<p>
 										#{index + 1} - {title}
 									</p>
@@ -147,9 +157,15 @@ function YouTubeGraph(props) {
 							)
 						})}
 					</div>
-					<div className='mt-5 flex w-96 flex-col lg:w-5/12'>
-						<h2 className='text-center text-xl font-bold text-white'>
-							Views counts
+					<div
+						id='views-container'
+						className='mt-5 flex w-96 flex-col lg:w-5/12'
+					>
+						<h2
+							id='views-text'
+							className='text-center text-xl font-bold text-white'
+						>
+							Views count
 						</h2>
 						<YouTubePieGraph
 							titles={titles}
@@ -159,9 +175,15 @@ function YouTubeGraph(props) {
 					</div>
 				</div>
 				<div className='flex flex-col items-center justify-around lg:flex-row'>
-					<div className='mt-5 flex w-96 flex-col lg:w-5/12'>
-						<h2 className='text-center text-xl font-bold text-white'>
-							Likes counts
+					<div
+						id='likes-container'
+						className='mt-5 flex w-96 flex-col lg:w-5/12'
+					>
+						<h2
+							id='likes-text'
+							className='text-center text-xl font-bold text-white'
+						>
+							Likes count
 						</h2>
 
 						<YouTubePieGraph
@@ -170,9 +192,15 @@ function YouTubeGraph(props) {
 							title='Likes'
 						/>
 					</div>
-					<div className='mt-5 flex w-96 flex-col lg:w-5/12'>
-						<h2 className='text-center text-xl font-bold text-white'>
-							Comments counts
+					<div
+						id='comments-container'
+						className='mt-5 flex w-96 flex-col lg:w-5/12'
+					>
+						<h2
+							id='comments-text'
+							className='text-center text-xl font-bold text-white'
+						>
+							Comments count
 						</h2>
 						<YouTubePieGraph
 							titles={titles}
@@ -190,6 +218,7 @@ function dropdownMenu(handleChange) {
 	return (
 		<div className='w-max-screen flex justify-center'>
 			<select
+				id='categories-dropdown'
 				className='m-4 flex w-80 rounded-xl bg-purple-200 p-2'
 				onChange={handleChange}
 			>
