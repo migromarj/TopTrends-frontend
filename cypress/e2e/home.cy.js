@@ -1,23 +1,27 @@
 describe('Navbar', () => {
 	it('Should show the navbar', () => {
 		cy.visit('/')
+		cy.title().should('eq', 'TopTrends | Home')
 		cy.get('#navBar').should('exist')
 		cy.get('#navBar').should('be.visible')
 		cy.get('#brandIcon').should('exist')
 		cy.get('#brandIcon').should('be.visible')
 		cy.get('#brandIcon').click()
 		cy.url().should('include', '/')
+		cy.title().should('eq', 'TopTrends | Home')
 		cy.get('#brand').should('exist')
 		cy.get('#brand').should('be.visible')
 		cy.get('#brand').should('have.text', 'TopTrends')
 		cy.get('#brand').click()
 		cy.url().should('include', '/')
+		cy.title().should('eq', 'TopTrends | Home')
 	})
 })
 
 describe('Search engine', () => {
 	it('Should show options for a country', () => {
 		cy.visit('/')
+		cy.title().should('eq', 'TopTrends | Home')
 		cy.get('#autocomplete-3-input').should('exist')
 		cy.get('#autocomplete-3-input').should('be.visible')
 		cy.get('#autocomplete-3-input').should('have.value', '')
@@ -31,9 +35,11 @@ describe('Search engine', () => {
 		cy.get('#search-ES').click()
 		cy.wait(5000)
 		cy.url().should('include', '/trends/ES')
+		cy.title().should('eq', 'TopTrends | Spain')
 	})
 	it("Shouldn't show options for a country", () => {
 		cy.visit('/')
+		cy.title().should('eq', 'TopTrends | Home')
 		cy.get('#autocomplete-3-input').should('exist')
 		cy.get('#autocomplete-3-input').should('be.visible')
 		cy.get('#autocomplete-3-input').should('have.value', '')
@@ -46,6 +52,7 @@ describe('Search engine', () => {
 describe('Background', () => {
 	it('It should show the background', () => {
 		cy.visit('/')
+		cy.title().should('eq', 'TopTrends | Home')
 		cy.wait(5000)
 		cy.get('#background').should('exist')
 		cy.get('#background').should('be.visible')
@@ -55,6 +62,7 @@ describe('Background', () => {
 describe('Footer', () => {
 	it('Should show the footer', () => {
 		cy.visit('/')
+		cy.title().should('eq', 'TopTrends | Home')
 		cy.wait(5000)
 		cy.get('#footer').should('exist')
 		cy.get('#footer').should('be.visible')

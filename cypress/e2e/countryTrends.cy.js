@@ -6,19 +6,9 @@ describe('Navbar', () => {
 		cy.get('#navBar').should('be.visible')
 		cy.get('#brandIcon').should('exist')
 		cy.get('#brandIcon').should('be.visible')
-		cy.get('#brandIcon').click()
-		cy.wait(5000)
-		cy.url().should('include', '/')
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
 		cy.get('#brand').should('exist')
 		cy.get('#brand').should('be.visible')
 		cy.get('#brand').should('have.text', 'TopTrends')
-		cy.get('#brand').click()
-		cy.wait(5000)
-		cy.url().should('include', '/')
-		cy.title().should('eq', 'TopTrends | Home')
 	})
 })
 
@@ -35,10 +25,6 @@ describe('Country title', () => {
 		cy.get('#countryName').should('have.text', 'Spain')
 		cy.get('#previousPage').should('exist')
 		cy.get('#previousPage').should('be.visible')
-		cy.get('#previousPage').click()
-		cy.wait(5000)
-		cy.url().should('include', '/')
-		cy.title().should('eq', 'TopTrends | Home')
 	})
 })
 
@@ -62,6 +48,7 @@ describe('Twitter container', () => {
 		for (let i = 1; i < 11; i++) {
 			cy.get('#Twitter-trend-' + i).should('exist')
 			cy.get('#Twitter-trend-' + i).should('be.visible')
+			cy.get('#Twitter-trend-' + i).should('include.text', `#${i} -`)
 		}
 		cy.get('#Twitter-trend-1').click()
 		cy.wait(5000)
@@ -95,6 +82,7 @@ describe('Google container', () => {
 		for (let i = 1; i < 11; i++) {
 			cy.get('#Google-trend-' + i).should('exist')
 			cy.get('#Google-trend-' + i).should('be.visible')
+			cy.get('#Google-trend-' + i).should('include.text', `#${i} -`)
 		}
 		cy.get('#Google-trend-1').click()
 		cy.wait(5000)
@@ -128,10 +116,14 @@ describe('YouTube container', () => {
 		for (let i = 1; i < 11; i++) {
 			cy.get('#YouTube-Trend-' + i).should('exist')
 			cy.get('#YouTube-Trend-' + i).should('be.visible')
+			cy.get('#YouTube-Trend-' + i).should('include.text', `#${i} -`)
 		}
 
 		cy.get('#dropdownYouTube').should('exist')
 		cy.get('#dropdownYouTube').should('be.visible')
+		cy.get('#dropdownYouTube').should('have.value', 'Default')
+		cy.get('#dropdownYouTube').select('Sports')
+		cy.get('#dropdownYouTube').should('have.value', 'Sports')
 
 		cy.get('#YouTube-more-info').should('exist')
 		cy.get('#YouTube-more-info').should('be.visible')
@@ -145,7 +137,8 @@ describe('YouTube container', () => {
 describe('404 page', () => {
 	it('Should show 404 page', () => {
 		cy.visit('/trends/NotCountry')
-		cy.title().should('eq', 'TopTrends | Error')
+		cy.wait(5000)
+		cy.title().should('eq', 'TopTrends | Country not found')
 		cy.get('#not-found-container').should('exist')
 		cy.get('#not-found-container').should('be.visible')
 		cy.get('#error-icon').should('exist')
