@@ -31,7 +31,7 @@ export default function TrendsContainer(props) {
 						<Link
 							id={`${props.name}-trend-${index + 1}`}
 							href={`/trends/${props.acronym}/words/${
-								typeof trend.name === 'string' ? parseTrendName(trend.name) : ''
+								typeof trend.name === 'string' ? trend.name : ''
 							}`}
 						>
 							{(props.name === 'Twitter' || props.name === 'Google') && (

@@ -10,6 +10,7 @@ import Error from '../../../../components/Error.jsx'
 import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404.jsx'
 import Head from 'next/head.js'
+import Emotion from '../../../../components/Emotion.jsx'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -86,7 +87,10 @@ export default function WordTrends() {
 						</div>
 						<div className='absolute w-full'>
 							<Title name={countryName} flag={flag} code={acronym} />
-							{dropdownMenu(handleChange)}
+							<div className='flex h-36 items-center justify-center'>
+								{dropdownMenu(handleChange)}
+								<Emotion word={word} />
+							</div>
 							<div
 								id='word-graphs'
 								className='flex flex-col items-center justify-around lg:flex-row'
@@ -115,16 +119,14 @@ export default function WordTrends() {
 
 function dropdownMenu(handleChange) {
 	return (
-		<div className='flex w-full justify-center'>
-			<select
-				id='period-dropdown'
-				className='my-5 rounded-xl bg-purple-200 p-3'
-				onChange={handleChange}
-			>
-				<option value='daily'>Daily</option>
-				<option value='weekly'>Weekly</option>
-				<option value='monthly'>Monthly</option>
-			</select>
-		</div>
+		<select
+			id='period-dropdown'
+			className='my-5 h-12 rounded-xl bg-purple-200 p-3'
+			onChange={handleChange}
+		>
+			<option value='daily'>Daily</option>
+			<option value='weekly'>Weekly</option>
+			<option value='monthly'>Monthly</option>
+		</select>
 	)
 }
