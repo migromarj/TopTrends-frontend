@@ -10,7 +10,7 @@ export default function NavBar() {
 			<Link href='/' className='flex items-center py-2'>
 				<Image
 					id='brandIcon'
-					src='/../public/images/web-icon.png'
+					src='/images/web-icon.png'
 					alt='Web icon'
 					width={50}
 					height={50}

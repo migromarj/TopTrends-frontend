@@ -13,7 +13,7 @@ export default function Country404() {
 			>
 				<Image
 					id='error-icon'
-					src='/../public/images/error-icon.png'
+					src='/images/error-icon.png'
 					alt='Error'
 					width={50}
 					height={50}

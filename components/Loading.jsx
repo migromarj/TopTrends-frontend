@@ -11,11 +11,7 @@ export default function Loading(props) {
 	}
 
 	return (
-		<div
-			className={`m-3 ${
-				props.container ? 'w-96' : 'flex w-full justify-center'
-			}`}
-		>
+		<div className={`m-3 ${props.container ? 'w-96' : 'flex justify-center'}`}>
 			<div className='flex items-center justify-center'>
 				<WebIcon name={props.name} />
 				<h2 className='text-2xl font-bold text-white'>{props.name}</h2>

@@ -38,11 +38,11 @@ export default function WordTopicsGraph(props) {
 
 	if (loading || error) {
 		return (
-			<div>
-				<div className='flex w-full flex-col justify-center lg:w-4/12'>
+			<div className='w-5/12'>
+				<div className='flex w-full flex-col justify-center'>
 					<h1 className='my-2 text-center text-xl font-bold '>
 						<span className='text-purple-400'>{props.title} </span>
-						<span className='text-white'>related topics</span>
+						<span className='text-white'>related topics 🔍</span>
 					</h1>
 					{loading && <Loading />}
 					{error && <Error />}
@@ -80,14 +80,26 @@ export default function WordTopicsGraph(props) {
 		],
 	}
 
+	const options = {
+		plugins: {
+			legend: {
+				labels: {
+					usePointStyle: true,
+				},
+			},
+		},
+	}
+
 	return (
 		<div
 			id='topics-container'
-			className='flex w-full flex-col justify-center lg:w-4/12'
+			className={`flex w-11/12 flex-col justify-center lg:h-96 ${
+				data.wordRelatedTopics.length === 0 ? 'lg:w-1/2' : 'lg:w-4/12'
+			}`}
 		>
 			<h1 id='topics-text' className='my-2 text-center text-xl font-bold'>
 				<span className='text-purple-400'>{props.title} </span>
-				<span className='text-white'>related topics</span>
+				<span className='text-white'>related topics 🔍</span>
 			</h1>
 			{data.wordRelatedTopics.length === 0 && (
 				<div className='flex justify-center'>
@@ -98,7 +110,8 @@ export default function WordTopicsGraph(props) {
 				<Pie
 					id='wordTopicsGraph'
 					data={graphData}
-					className='rounded-xl bg-purple-100 p-1'
+					options={options}
+					className='max-h-96 rounded-xl bg-purple-100 p-1'
 				/>
 			)}
 		</div>

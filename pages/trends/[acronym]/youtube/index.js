@@ -3,12 +3,19 @@ import { useState } from 'react'
 import { gql, useQuery } from '@apollo/client'
 import YouTubePieGraph from '../../../../components/YouTubePieGraph'
 import Title from '../../../../components/Title'
-import Earth from '../../../../components/Earth'
 import Loading from '../../../../components/Loading'
 import Error from '../../../../components/Error.jsx'
 import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404'
+import YouTubeVideoContainer from '../../../../components/YouTubeVideoContainer'
 import Head from 'next/head.js'
+
+import dynamic from 'next/dynamic'
+
+const Earth = dynamic(() => import('../../../../components/Earth.jsx'), {
+	ssr: false,
+})
+//import Earth from '../../../../components/Earth.jsx'
 
 export default function YouTubeStaistics() {
 	const router = useRouter()
@@ -85,7 +92,7 @@ export default function YouTubeStaistics() {
 								id='statistics-title'
 								className='text-center text-3xl font-bold text-white'
 							>
-								YouTube Statistics
+								YouTube Statistics 📺
 							</h1>
 							{dropdownMenu(handleChange)}
 							<div>
@@ -138,34 +145,14 @@ function YouTubeGraph(props) {
 
 		return (
 			<div id='graphs-container'>
-				<div className='flex flex-col items-center justify-around lg:flex-row'>
-					<div
-						id='yt-trends-container'
-						className='mx-10 flex w-80 flex-col rounded-xl bg-purple-400 p-2'
-					>
-						{titles.map((title, index) => {
-							return (
-								<div
-									id={`yt-trend-${index + 1}`}
-									key={index}
-									className='m-2 rounded-xl bg-purple-200 p-2'
-								>
-									<p>
-										#{index + 1} - {title}
-									</p>
-								</div>
-							)
-						})}
-					</div>
-					<div
-						id='views-container'
-						className='mt-5 flex w-96 flex-col lg:w-5/12'
-					>
+				<YouTubeVideoContainer titles={titles} />
+				<div className='flex flex-wrap justify-around'>
+					<div id='views-container' className='mt-5 flex flex-col'>
 						<h2
 							id='views-text'
 							className='text-center text-xl font-bold text-white'
 						>
-							Views count
+							Views 👁️
 						</h2>
 						<YouTubePieGraph
 							titles={titles}
@@ -173,17 +160,12 @@ function YouTubeGraph(props) {
 							title='Views'
 						/>
 					</div>
-				</div>
-				<div className='flex flex-col items-center justify-around lg:flex-row'>
-					<div
-						id='likes-container'
-						className='mt-5 flex w-96 flex-col lg:w-5/12'
-					>
+					<div id='likes-container' className='mt-5 flex flex-col'>
 						<h2
 							id='likes-text'
 							className='text-center text-xl font-bold text-white'
 						>
-							Likes count
+							Likes 👍
 						</h2>
 
 						<YouTubePieGraph
@@ -192,15 +174,12 @@ function YouTubeGraph(props) {
 							title='Likes'
 						/>
 					</div>
-					<div
-						id='comments-container'
-						className='mt-5 flex w-96 flex-col lg:w-5/12'
-					>
+					<div id='comments-container' className='mt-5 flex flex-col'>
 						<h2
 							id='comments-text'
 							className='text-center text-xl font-bold text-white'
 						>
-							Comments count
+							Comments 💬
 						</h2>
 						<YouTubePieGraph
 							titles={titles}
