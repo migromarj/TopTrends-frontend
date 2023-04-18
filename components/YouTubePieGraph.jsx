@@ -6,10 +6,12 @@ export default function YouTubePieGraph(props) {
 	Chart.register(CategoryScale)
 
 	const graphData = {
-		labels: props.titles,
+		labels: props.titles.map(title =>
+			title.length > 35 ? `${title.substring(0, 35)}...` : title
+		),
 		datasets: [
 			{
-				label: `${props.title} count`,
+				label: props.title,
 				data: props.values,
 				fill: false,
 				backgroundColor: [
@@ -25,13 +27,26 @@ export default function YouTubePieGraph(props) {
 		],
 	}
 
+	const options = {
+		plugins: {
+			legend: {
+				labels: {
+					usePointStyle: true,
+				},
+			},
+		},
+	}
+
 	return (
-		<div>
-			<Pie
-				id={`${props.title}-graph`}
-				data={graphData}
-				className='rounded-xl bg-purple-100 p-1'
-			/>
+		<div className='flex w-72 justify-center xs:w-96'>
+			<div className='w-full'>
+				<Pie
+					id={`${props.title}-graph`}
+					data={graphData}
+					options={options}
+					className='rounded-xl bg-purple-100 p-1'
+				/>
+			</div>
 		</div>
 	)
 }

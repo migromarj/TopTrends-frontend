@@ -5,7 +5,7 @@ export default function WebIcon(props) {
 		return (
 			<Image
 				id='twitter-icon'
-				src='/../public/images/twitter-icon.png'
+				src='/images/twitter-icon.png'
 				alt='Twitter Icon'
 				width={25}
 				height={25}
@@ -16,7 +16,7 @@ export default function WebIcon(props) {
 		return (
 			<Image
 				id='google-icon'
-				src='/../public/images/google-icon.png'
+				src='/images/google-icon.png'
 				alt='Google Icon'
 				width={25}
 				height={25}
@@ -27,7 +27,7 @@ export default function WebIcon(props) {
 		return (
 			<Image
 				id='youtube-icon'
-				src='/../public/images/youtube-icon.png'
+				src='/images/youtube-icon.png'
 				alt='YouTube Icon'
 				width={25}
 				height={25}

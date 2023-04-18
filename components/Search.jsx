@@ -26,7 +26,7 @@ const AutocompleteItem = ({ name, acronym, flag, woeid, pn }) => {
 						<div className='flex items-center justify-center sm:justify-end'>
 							{woeid && (
 								<Image
-									src='/../public/images/twitter-icon.png'
+									src='/images/twitter-icon.png'
 									alt='Twitter Icon'
 									width={20}
 									height={20}
@@ -35,7 +35,7 @@ const AutocompleteItem = ({ name, acronym, flag, woeid, pn }) => {
 							)}
 							{pn && (
 								<Image
-									src='/../public/images/google-icon.png'
+									src='/images/google-icon.png'
 									alt='Google Icon'
 									width={20}
 									height={20}
@@ -43,7 +43,7 @@ const AutocompleteItem = ({ name, acronym, flag, woeid, pn }) => {
 								/>
 							)}
 							<Image
-								src='/../public/images/youtube-icon.png'
+								src='/images/youtube-icon.png'
 								alt='YouTube Icon'
 								width={20}
 								height={20}
@@ -123,6 +123,8 @@ export default function Search(props) {
 					ref={inputRef}
 					className='w-full rounded-full border-2 border-black bg-purple-100 p-2 pl-4'
 					{...inputProps}
+					aria-labelledby='autocomplete-1-label'
+					id='autocomplete-1-label'
 				/>
 				{autocompleteState.isOpen && (
 					<div
@@ -137,8 +139,8 @@ export default function Search(props) {
 								<section id='countryList' key={`section-${index}`}>
 									{items.length > 0 && (
 										<ul {...autocomplete.getListProps()}>
-											{items.map(item => (
-												<AutocompleteItem key={item.id} {...item} />
+											{items.map((item, index) => (
+												<AutocompleteItem key={index} {...item} />
 											))}
 										</ul>
 									)}

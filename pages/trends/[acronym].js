@@ -4,13 +4,19 @@ import { gql, useQuery } from '@apollo/client'
 import Title from '../../components/Title.jsx'
 import TrendsContainer from '../../components/TrendsContainer.jsx'
 import { useState, useEffect } from 'react'
-import Earth from '../../components/Earth.jsx'
 import Loading from '../../components/Loading.jsx'
 import Error from '../../components/Error.jsx'
 import Link from 'next/link'
 import WebIcon from '../../components/WebIcon.jsx'
 import Footer from '../../components/Footer.jsx'
 import Country404 from '../../components/Country404.jsx'
+
+import dynamic from 'next/dynamic'
+
+const Earth = dynamic(() => import('../../components/Earth.jsx'), {
+	ssr: false,
+})
+//import Earth from '../../components/Earth.jsx'
 
 export default function Country() {
 	const router = useRouter()

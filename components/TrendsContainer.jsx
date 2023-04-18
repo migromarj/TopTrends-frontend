@@ -18,9 +18,10 @@ export default function TrendsContainer(props) {
 					</h2>
 				</div>
 			)}
+
 			<div
 				className={`overflow-auto rounded-xl bg-purple-400 bg-opacity-20 p-3 ${
-					props.name === 'YouTube' ? 'h-80' : 'h-96'
+					props.name === 'YouTube' ? 'h-80 xl:h-100' : 'h-96 xl:h-120'
 				}`}
 			>
 				{props.trends.map((trend, index) => (
@@ -30,13 +31,16 @@ export default function TrendsContainer(props) {
 					>
 						<Link
 							id={`${props.name}-trend-${index + 1}`}
-							href={`/trends/${props.acronym}/words/${
-								typeof trend.name === 'string' ? trend.name : ''
-							}`}
+							href={`/trends/${props.acronym}/words/${encodeURIComponent(
+								trend.name
+							)}`}
 						>
 							{(props.name === 'Twitter' || props.name === 'Google') && (
-								<div>
-									#{index + 1} - {trend.name}
+								<div className='flex items-center justify-between'>
+									<div className='w-full'>
+										#{index + 1} - {trend.name}
+									</div>
+									<div className='text-right'>🖱</div>
 								</div>
 							)}
 						</Link>
@@ -50,16 +54,4 @@ export default function TrendsContainer(props) {
 			</div>
 		</div>
 	)
-}
-
-function parseTrendName(name) {
-	const firstCharacter = name[0]
-
-	if (firstCharacter === '#') {
-		const parsedName = name.substring(1).replace(/([A-Z])/g, ' $1')
-
-		return parsedName.trim()
-	}
-
-	return name
 }
