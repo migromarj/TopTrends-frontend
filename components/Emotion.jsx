@@ -26,6 +26,7 @@ export default function Emotion(props) {
 	if (error) return <span />
 
 	if (data) {
+		if (data.trendEmotions.length === 0) return <span />
 		const negative = data.trendEmotions[0].negativeEmotion
 		const neutral = data.trendEmotions[0].neutralEmotion
 		const positive = data.trendEmotions[0].positiveEmotion
@@ -53,7 +54,7 @@ export default function Emotion(props) {
 		const options = { events: [] }
 
 		return (
-			<div className='ml-5 h-20 select-none'>
+			<div id='emotion-container' className='ml-5 h-20 select-none'>
 				<Doughnut data={dataGraph} options={options} />
 			</div>
 		)
