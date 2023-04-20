@@ -44,6 +44,21 @@ describe('Dropdown Menu', () => {
 	})
 })
 
+describe('Emotion Graph', () => {
+	it('Should show the emotion graph', () => {
+		cy.visit('/trends/ES/words/Messi')
+		cy.title().should('eq', 'TopTrends | Spain | Messi')
+		cy.get('#emotion-container').should('exist')
+		cy.get('#emotion-container').should('be.visible')
+	})
+	it("Shouldn't show the emotion graph", () => {
+		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
+		cy.wait(15000)
+		cy.title().should('eq', 'TopTrends | Spain | FKSJDHFLSKDJGIUVBSDKL')
+		cy.get('#emotion-container').should('not.exist')
+	})
+})
+
 describe('Word Interest Graph', () => {
 	it('Should show the word interest graph', () => {
 		cy.visit('/trends/ES/words/Messi')
