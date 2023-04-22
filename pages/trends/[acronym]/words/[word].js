@@ -48,7 +48,7 @@ export default function WordTrends() {
 		return (
 			<div>
 				<Head>
-					<title>TopTrends | Error | {word}</title>
+					<title>TopTrends | Loading | {word}</title>
 				</Head>
 				<main>
 					<Loading background />

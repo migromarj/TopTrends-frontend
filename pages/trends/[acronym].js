@@ -61,7 +61,7 @@ export default function Country() {
 		return (
 			<div>
 				<Head>
-					<title>TopTrends | Error</title>
+					<title>TopTrends | Loading</title>
 				</Head>
 				<main>
 					<Loading background />
@@ -214,6 +214,7 @@ function YouTubeTrends(props) {
 			) {
 				id
 				title
+				videoId
 				thumbnail
 			}
 		}
