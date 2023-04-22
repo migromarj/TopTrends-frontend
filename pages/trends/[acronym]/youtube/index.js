@@ -46,7 +46,7 @@ export default function YouTubeStaistics() {
 		return (
 			<div>
 				<Head>
-					<title>TopTrends | Error | YouTube</title>
+					<title>TopTrends | Loading | YouTube</title>
 				</Head>
 				<main>
 					<Loading background />

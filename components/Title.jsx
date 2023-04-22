@@ -12,6 +12,8 @@ export default function Title(props) {
 			return `/trends/${props.code}`
 		} else if (/^\/trends\/[a-zA-Z]{2}\/youtube$/.test(path)) {
 			return `/trends/${props.code}`
+		} else if (/^\/trends\/[a-zA-Z]{2}\/youtube\/.*$/.test(path)) {
+			return `/trends/${props.code}`
 		} else {
 			return '/'
 		}

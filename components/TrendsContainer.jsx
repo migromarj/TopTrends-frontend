@@ -3,7 +3,7 @@ import WebIcon from './WebIcon'
 
 export default function TrendsContainer(props) {
 	return (
-		<div id={`container-${props.name}`} className='m-3 w-96'>
+		<div id={`container-${props.name}`} className='m-3 w-80 xs:w-96 '>
 			{props.name !== 'YouTube' && (
 				<div
 					id={`${props.name}-title-container`}
@@ -31,24 +31,36 @@ export default function TrendsContainer(props) {
 					>
 						<Link
 							id={`${props.name}-trend-${index + 1}`}
-							href={`/trends/${props.acronym}/words/${encodeURIComponent(
-								trend.name
-							)}`}
+							href={
+								props.name !== 'YouTube'
+									? `/trends/${props.acronym}/words/${encodeURIComponent(
+											trend.name
+									  )}`
+									: `/trends/${props.acronym}/youtube/${trend.videoId}`
+							}
 						>
-							{(props.name === 'Twitter' || props.name === 'Google') && (
-								<div className='flex items-center justify-between'>
-									<div className='w-full'>
-										#{index + 1} - {trend.name}
-									</div>
-									<div className='text-right'>▷</div>
+							<div className='flex items-center justify-between'>
+								<div className='w-full'>
+									{(props.name === 'Twitter' || props.name === 'Google') && (
+										<span>
+											#{index + 1} - {trend.name}
+										</span>
+									)}
+									{props.name === 'YouTube' && (
+										<span>
+											#{index + 1} - {trend.title}
+										</span>
+									)}
 								</div>
-							)}
-						</Link>
-						{props.name === 'YouTube' && (
-							<div id={`${props.name}-Trend-${index + 1}`}>
-								#{index + 1} - {trend.title}
+								<div
+									className={`text-right ${
+										props.name === 'YouTube' ? 'ml-5' : ''
+									}`}
+								>
+									▷
+								</div>
 							</div>
-						)}
+						</Link>
 					</div>
 				))}
 			</div>
