@@ -93,9 +93,15 @@ export default function WordTrends() {
 						</div>
 						<div className='absolute w-full'>
 							<Title name={countryName} flag={flag} code={acronym} />
+							<h1
+								id='statistics-word-title'
+								className='mt-5 text-center text-3xl font-bold text-white'
+							>
+								<span className='text-purple-400'>{word} </span>
+								<span className='text-white'>word details 📑</span>
+							</h1>
 							<div className='flex h-36 items-center justify-center'>
 								{dropdownMenu(handleChange)}
-								<Emotion word={word} />
 							</div>
 							<div
 								id='word-graphs'
@@ -114,6 +120,13 @@ export default function WordTrends() {
 									title={`${word}`}
 								/>
 							</div>
+							<div className='mt-20 mb-10 flex w-full flex-col justify-center'>
+								<h1 className='my-2 text-center text-xl font-bold '>
+									<span className='text-purple-400'>{word} </span>
+									<span className='text-white'>emotions 😊</span>
+								</h1>
+							</div>
+							<Emotion word={word} />
 							<Footer />
 						</div>
 					</div>
@@ -127,7 +140,7 @@ function dropdownMenu(handleChange) {
 	return (
 		<select
 			id='period-dropdown'
-			className='my-5 h-12 rounded-xl bg-purple-200 p-3'
+			className='mb-5 h-12 w-36 rounded-xl bg-purple-200 p-3'
 			onChange={handleChange}
 		>
 			<option value='daily'>Daily</option>

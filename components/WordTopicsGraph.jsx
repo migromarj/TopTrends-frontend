@@ -59,7 +59,7 @@ export default function WordTopicsGraph(props) {
 		),
 		datasets: [
 			{
-				label: 'Word Topics',
+				label: 'Relationship with the trend (out of 100)',
 				data: data.wordRelatedTopics.map(topic => topic.value),
 				fill: false,
 				backgroundColor: [
@@ -85,6 +85,7 @@ export default function WordTopicsGraph(props) {
 			legend: {
 				labels: {
 					usePointStyle: true,
+					color: 'black',
 				},
 			},
 		},

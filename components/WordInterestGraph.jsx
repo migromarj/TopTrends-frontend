@@ -53,13 +53,58 @@ export default function WordInterestGraph(props) {
 		labels: data.wordGoogleTrends.map(trend => parseDate(trend.trendDatetime)),
 		datasets: [
 			{
-				label: 'Word Interest',
+				label: 'Interest Percentage (%)',
 				data: data.wordGoogleTrends.map(trend => trend.value),
 				fill: false,
-				backgroundColor: 'rgb(255, 99, 132)',
+				backgroundColor: 'rgb(192 132 252)',
 				borderColor: 'rgba(255, 99, 132, 0.2)',
 			},
 		],
+	}
+
+	const options = {
+		plugins: {
+			legend: {
+				display: false,
+			},
+		},
+		scales: {
+			x: {
+				title: {
+					display: true,
+					text: 'Datetime',
+					color: 'black',
+					font: {
+						size: 16,
+					},
+				},
+				ticks: {
+					color: 'black',
+					font: {
+						size: 12,
+					},
+				},
+			},
+			y: {
+				title: {
+					display: true,
+					text: 'Interest Percentage',
+					color: 'black',
+					font: {
+						size: 16,
+					},
+				},
+				ticks: {
+					callback: function (value) {
+						return value + '%'
+					},
+					color: 'black',
+					font: {
+						size: 14,
+					},
+				},
+			},
+		},
 	}
 
 	return (
@@ -82,6 +127,7 @@ export default function WordInterestGraph(props) {
 				<Line
 					id='wordInterestGraph'
 					data={graphData}
+					options={options}
 					className='rounded-xl bg-purple-100'
 				/>
 			)}
