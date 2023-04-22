@@ -21,7 +21,7 @@ export default function TrendsContainer(props) {
 
 			<div
 				className={`overflow-auto rounded-xl bg-purple-400 bg-opacity-20 p-3 ${
-					props.name === 'YouTube' ? 'h-80 xl:h-100' : 'h-96 xl:h-120'
+					props.name === 'YouTube' ? 'h-80 2xl:h-100' : 'h-96 2xl:h-120'
 				}`}
 			>
 				{props.trends.map((trend, index) => (
@@ -40,7 +40,7 @@ export default function TrendsContainer(props) {
 									<div className='w-full'>
 										#{index + 1} - {trend.name}
 									</div>
-									<div className='text-right'>🖱</div>
+									<div className='text-right'>▷</div>
 								</div>
 							)}
 						</Link>
