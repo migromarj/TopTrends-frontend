@@ -114,10 +114,14 @@ describe('YouTube container', () => {
 		cy.get('#container-YouTube').should('be.visible')
 
 		for (let i = 1; i < 11; i++) {
-			cy.get('#YouTube-Trend-' + i).should('exist')
-			cy.get('#YouTube-Trend-' + i).should('be.visible')
-			cy.get('#YouTube-Trend-' + i).should('include.text', `#${i} -`)
+			cy.get('#YouTube-trend-' + i).should('exist')
+			cy.get('#YouTube-trend-' + i).should('be.visible')
+			cy.get('#YouTube-trend-' + i).should('include.text', `#${i} -`)
 		}
+		cy.get('#YouTube-trend-1').click()
+		cy.wait(5000)
+		cy.url().should('include', '/trends/ES/youtube/')
+		cy.visit('/trends/ES')
 
 		cy.get('#dropdownYouTube').should('exist')
 		cy.get('#dropdownYouTube').should('be.visible')
