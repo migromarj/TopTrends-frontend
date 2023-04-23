@@ -51,7 +51,12 @@ export default function Emotion(props) {
 	}
 
 	if (data) {
-		if (data.trendEmotions.length === 0) return <span />
+		if (data.trendEmotions.length === 0)
+			return (
+				<div id='data-not-found'>
+					<Error />
+				</div>
+			)
 		const sadness = data.trendEmotions[0].sadnessEmotion
 		const joy = data.trendEmotions[0].joyEmotion
 		const fear = data.trendEmotions[0].fearEmotion
@@ -175,7 +180,7 @@ export default function Emotion(props) {
 				className='flex flex-col items-center justify-around lg:flex-row'
 			>
 				<div
-					id='emotion-container-2'
+					id='emotion-container-1'
 					className='flex w-11/12 flex-col justify-center lg:h-96 lg:w-7/12'
 				>
 					<Bar
