@@ -14,7 +14,13 @@ describe('Navbar', () => {
 
 describe('Country title', () => {
 	it('Should show title of a country', () => {
-		cy.visit('/trends/ES/youtube/WoE6sG2JBrg')
+		cy.visit('/trends/ES')
+		cy.title().should('eq', 'TopTrends | Spain')
+		cy.wait(10000)
+		cy.get('#YouTube-trend-2').should('exist')
+		cy.get('#YouTube-trend-2').should('be.visible')
+		cy.get('#YouTube-trend-2').click()
+		cy.wait(10000)
 		cy.title().should('eq', 'TopTrends | Spain')
 		cy.get('#countryTitle').should('exist')
 		cy.get('#countryTitle').should('be.visible')
@@ -34,14 +40,24 @@ describe('Country title', () => {
 
 describe('Page content title', () => {
 	it('Should show title of a video', () => {
-		cy.visit('/trends/ES/youtube/WoE6sG2JBrg')
+		cy.visit('/trends/ES')
 		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#statistics-word-title').should('exist')
-		cy.get('#statistics-word-title').should('be.visible')
-		cy.get('#statistics-word-title').should(
-			'include.text',
-			'Fran Perea, Despistaos - Uno más uno son 7 (Videoclip oficial) emotions'
-		)
+		cy.wait(10000)
+		cy.get('#YouTube-trend-2').should('exist')
+		cy.get('#YouTube-trend-2').should('be.visible')
+		//Get the text that is in #YouTube-trend-2
+		cy.get('#YouTube-trend-2').invoke('text').then((title) => {
+			title = title.substring(5, title.length - 1)
+			cy.get('#YouTube-trend-2').click()
+			cy.wait(30000)
+			cy.title().should('eq', 'TopTrends | Spain')
+			cy.get('#statistics-word-title').should('exist')
+			cy.get('#statistics-word-title').should('be.visible')
+			cy.get('#statistics-word-title').should(
+				'include.text',
+				title + ' emotions'
+			)
+		})
 	})
 })
 
@@ -81,8 +97,12 @@ describe('Footer', () => {
 
 describe('Emotion Graphs', () => {
 	it('Should show the emotion graphs', () => {
-		cy.visit('/trends/ES/youtube/WoE6sG2JBrg')
+		cy.visit('/trends/ES')
 		cy.title().should('eq', 'TopTrends | Spain')
+		cy.wait(10000)
+		cy.get('#YouTube-trend-2').should('exist')
+		cy.get('#YouTube-trend-2').should('be.visible')
+		cy.get('#YouTube-trend-2').click()
 		cy.wait(30000)
 		cy.get('#emotion-container').should('exist')
 		cy.get('#emotion-container').should('be.visible')
