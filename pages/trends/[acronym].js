@@ -10,13 +10,7 @@ import Link from 'next/link'
 import WebIcon from '../../components/WebIcon.jsx'
 import Footer from '../../components/Footer.jsx'
 import Country404 from '../../components/Country404.jsx'
-
-import dynamic from 'next/dynamic'
-
-const Earth = dynamic(() => import('../../components/Earth.jsx'), {
-	ssr: false,
-})
-//import Earth from '../../components/Earth.jsx'
+import EarthMap from '../../components/EarthMap.jsx'
 
 export default function Country() {
 	const router = useRouter()
@@ -100,10 +94,7 @@ export default function Country() {
 				</Head>
 				<main>
 					<div>
-						<div className='fixed'>
-							<Earth autoFocus lat={lat} lng={lng} />
-						</div>
-						<div className='absolute w-full'>
+						<EarthMap lat={lat} lng={lng}>
 							<Title name={name} flag={flag} />
 
 							<div
@@ -141,7 +132,7 @@ export default function Country() {
 							<div className={`${visible ? 'block' : 'hidden'}`}>
 								<Footer />
 							</div>
-						</div>
+						</EarthMap>
 					</div>
 				</main>
 			</div>

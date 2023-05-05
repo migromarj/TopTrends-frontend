@@ -1,19 +1,12 @@
 import { useRouter } from 'next/router'
 import { gql, useQuery } from '@apollo/client'
 import Title from '../../../../components/Title.jsx'
-import Loading from '../../../../components/Loading.jsx'
-import Error from '../../../../components/Error.jsx'
 import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404.jsx'
 import Head from 'next/head.js'
 import YouTubeEmotion from '../../../../components/YouTubeEmotion.jsx'
-
-import dynamic from 'next/dynamic'
-
-const Earth = dynamic(() => import('../../../../components/Earth.jsx'), {
-	ssr: false,
-})
-//import Earth from '../../../../components/Earth.jsx'
+import EarthMap from '../../../../components/EarthMap.jsx'
+import LoadingError from '../../../../components/LoadingError.jsx'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -35,30 +28,8 @@ export default function WordTrends() {
 		variables: { acronym },
 	})
 
-	if (loading) {
-		return (
-			<div>
-				<Head>
-					<title>TopTrends | Loading</title>
-				</Head>
-				<main>
-					<Loading background />
-				</main>
-			</div>
-		)
-	}
-
-	if (error) {
-		return (
-			<div>
-				<Head>
-					<title>TopTrends | Error</title>
-				</Head>
-				<main>
-					<Error background />
-				</main>
-			</div>
-		)
+	if (loading || error) {
+		return <LoadingError loading={loading} error={error} />
 	}
 
 	if (data) {
@@ -77,14 +48,11 @@ export default function WordTrends() {
 				</Head>
 				<main>
 					<div>
-						<div className='fixed'>
-							<Earth autoFocus lat={lat} lng={lng} />
-						</div>
-						<div className='absolute w-full'>
+						<EarthMap lat={lat} lng={lng}>
 							<Title name={countryName} flag={flag} code={acronym} />
 							<YouTubeEmotion videoId={videoId} />
 							<Footer />
-						</div>
+						</EarthMap>
 					</div>
 				</main>
 			</div>
