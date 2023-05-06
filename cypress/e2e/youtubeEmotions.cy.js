@@ -1,14 +1,15 @@
+import {
+	checkNavbar,
+	checkCountryTitle,
+	check404,
+	checkBackground,
+	checkFooter,
+} from '../utils/aux_functions'
+
 describe('Navbar', () => {
 	it('Should show the navbar', () => {
 		cy.visit('/trends/ES/youtube/WoE6sG2JBrg')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#navBar').should('exist')
-		cy.get('#navBar').should('be.visible')
-		cy.get('#brandIcon').should('exist')
-		cy.get('#brandIcon').should('be.visible')
-		cy.get('#brand').should('exist')
-		cy.get('#brand').should('be.visible')
-		cy.get('#brand').should('include.text', 'TopTrends')
+		checkNavbar('TopTrends | Spain')
 	})
 })
 
@@ -21,20 +22,13 @@ describe('Country title', () => {
 		cy.get('#YouTube-trend-2').should('be.visible')
 		cy.get('#YouTube-trend-2').click()
 		cy.wait(10000)
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#countryTitle').should('exist')
-		cy.get('#countryTitle').should('be.visible')
-		cy.get('#countryFlag').should('exist')
-		cy.get('#countryFlag').should('be.visible')
-		cy.get('#countryName').should('exist')
-		cy.get('#countryName').should('be.visible')
-		cy.get('#countryName').should('have.text', 'Spain')
-		cy.get('#previousPage').should('exist')
-		cy.get('#previousPage').should('be.visible')
-		cy.get('#previousPage').click()
-		cy.wait(5000)
-		cy.url().should('include', '/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
+		checkCountryTitle(
+			'/trends/ES/youtube/WoE6sG2JBrg',
+			'TopTrends | Spain',
+			'/trends/ES',
+			'TopTrends | Spain',
+			false
+		)
 	})
 })
 
@@ -46,52 +40,38 @@ describe('Page content title', () => {
 		cy.get('#YouTube-trend-2').should('exist')
 		cy.get('#YouTube-trend-2').should('be.visible')
 		//Get the text that is in #YouTube-trend-2
-		cy.get('#YouTube-trend-2').invoke('text').then((title) => {
-			title = title.substring(5, title.length - 1)
-			cy.get('#YouTube-trend-2').click()
-			cy.wait(30000)
-			cy.title().should('eq', 'TopTrends | Spain')
-			cy.get('#statistics-word-title').should('exist')
-			cy.get('#statistics-word-title').should('be.visible')
-			cy.get('#statistics-word-title').should(
-				'include.text',
-				title + ' emotions'
-			)
-		})
+		cy.get('#YouTube-trend-2')
+			.invoke('text')
+			.then(title => {
+				title = title.substring(5, title.length - 1)
+				cy.get('#YouTube-trend-2').click()
+				cy.wait(30000)
+				cy.title().should('eq', 'TopTrends | Spain')
+				cy.get('#statistics-word-title').should('exist')
+				cy.get('#statistics-word-title').should('be.visible')
+				cy.get('#statistics-word-title').should(
+					'include.text',
+					title + ' emotions'
+				)
+			})
 	})
 })
 
 describe('404 page', () => {
 	it('Should show 404 page', () => {
-		cy.visit('/trends/NotCountry/youtube/WoE6sG2JBrg')
-		cy.wait(5000)
-		cy.title().should('eq', 'TopTrends | Country not found')
-		cy.get('#not-found-container').should('exist')
-		cy.get('#not-found-container').should('be.visible')
-		cy.get('#error-icon').should('exist')
-		cy.get('#error-icon').should('be.visible')
-		cy.get('#not-found-text').should('exist')
-		cy.get('#not-found-text').should('be.visible')
-		cy.get('#not-found-text').should('include.text', 'Country not found')
+		check404('/trends/NotCountry/youtube/WoE6sG2JBrg')
 	})
 })
 
 describe('Background', () => {
 	it('It should show the background', () => {
-		cy.visit('/trends/ES/youtube/WoE6sG2JBrg')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#background').should('exist')
+		checkBackground('/trends/ES/youtube/WoE6sG2JBrg', 'TopTrends | Spain')
 	})
 })
 
 describe('Footer', () => {
 	it('Should show the footer', () => {
-		cy.visit('/trends/ES/youtube/WoE6sG2JBrg')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.wait(5000)
-		cy.get('#footer').should('exist')
-		cy.get('#footer').should('be.visible')
-		cy.get('#footer').should('include.text', 'Designed by Miguel Romero Arjona')
+		checkFooter('/trends/ES/youtube/WoE6sG2JBrg', 'TopTrends | Spain')
 	})
 })
 

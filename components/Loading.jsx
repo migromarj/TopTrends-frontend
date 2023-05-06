@@ -12,7 +12,7 @@ export default function Loading(props) {
 
 	return (
 		<div className={`m-3 ${props.container ? 'w-96' : 'flex justify-center'}`}>
-			{props.name && <TitleContainer name={props.name} />}
+			<TitleContainer name={props.name} />
 			<div
 				className={`rounded-xl p-3 ${
 					props.container ? 'bg-purple-400 bg-opacity-20' : ''

@@ -18,7 +18,7 @@ export default function Error(props) {
 	return (
 		<div id='error-container' className='flex w-full justify-center'>
 			<div className='m-3 w-96'>
-				{props.name && <TitleContainer name={props.name} />}
+				<TitleContainer name={props.name} />
 				<div className='rounded-xl bg-purple-400 bg-opacity-20 p-3'>
 					<div className='flex items-center justify-center'>
 						<Image
