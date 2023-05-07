@@ -64,10 +64,94 @@ function checkFooter(visit, title) {
 	cy.get('#footer').should('include.text', 'Designed by Miguel Romero Arjona')
 }
 
+function checkSearchEngine() {
+	cy.visit('/')
+	cy.wait(3000)
+	cy.title().should('eq', 'TopTrends | Home')
+	cy.get('#autocomplete-1-label').should('exist')
+	cy.get('#autocomplete-1-label').should('be.visible')
+	cy.get('#autocomplete-1-label').should('have.value', '')
+}
+
+function checkYouTubeStatisticsGraph() {
+	cy.visit('/trends/ES/youtube')
+	cy.title().should('eq', 'TopTrends | Spain | YouTube')
+	cy.get('#graphs-container').should('exist')
+	cy.get('#graphs-container').should('be.visible')
+}
+
+function checkYouTubeTrend() {
+	cy.visit('/trends/ES')
+	cy.title().should('eq', 'TopTrends | Spain')
+	cy.wait(10000)
+	cy.get('#YouTube-trend-2').should('exist')
+	cy.get('#YouTube-trend-2').should('be.visible')
+}
+
+function checkWordGraphs() {
+	cy.visit('/trends/ES/words/Messi')
+	cy.title().should('eq', 'TopTrends | Spain | Messi')
+	cy.get('#word-graphs').should('exist')
+	cy.get('#word-graphs').should('be.visible')
+}
+
+function checkErrorWordGraphs() {
+	cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
+	cy.wait(10000)
+	cy.title().should('eq', 'TopTrends | Spain | FKSJDHFLSKDJGIUVBSDKL')
+	cy.get('#word-graphs').should('exist')
+	cy.get('#word-graphs').should('be.visible')
+}
+
+function checkInterest(title) {
+	cy.get('#interest-container').should('exist')
+	cy.get('#interest-container').should('be.visible')
+	cy.get('#interest-text').should('exist')
+	cy.get('#interest-text').should('be.visible')
+	cy.get('#interest-text').should('include.text', title)
+}
+
+function checkRelatedTopics(text) {
+	cy.get('#topics-container').should('exist')
+	cy.get('#topics-container').should('be.visible')
+	cy.get('#topics-text').should('exist')
+	cy.get('#topics-text').should('be.visible')
+	cy.get('#topics-text').should('include.text', text)
+}
+
+function checkEmotionGraphs() {
+	cy.wait(30000)
+	cy.get('#emotion-container').should('exist')
+	cy.get('#emotion-container').should('be.visible')
+	cy.get('#emotion-container-1').should('exist')
+	cy.get('#emotion-container-1').should('be.visible')
+	cy.get('#emotion-container-2').should('exist')
+	cy.get('#emotion-container-2').should('be.visible')
+}
+
+function checkErrorEmotionGraphs() {
+	cy.wait(30000)
+	cy.get('#emotion-container').should('not.exist')
+	cy.get('#emotion-container-1').should('not.exist')
+	cy.get('#emotion-container-2').should('not.exist')
+	cy.get('#error-container').should('exist')
+	cy.get('#error-container').should('be.visible')
+	cy.get('#error-container').should('include.text', 'Data not found')
+}
+
 export {
 	checkNavbar,
 	checkCountryTitle,
 	check404,
 	checkBackground,
 	checkFooter,
+	checkSearchEngine,
+	checkYouTubeStatisticsGraph,
+	checkYouTubeTrend,
+	checkWordGraphs,
+	checkErrorWordGraphs,
+	checkInterest,
+	checkRelatedTopics,
+	checkEmotionGraphs,
+	checkErrorEmotionGraphs,
 }

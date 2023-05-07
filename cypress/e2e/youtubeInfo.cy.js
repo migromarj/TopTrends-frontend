@@ -4,6 +4,8 @@ import {
 	check404,
 	checkBackground,
 	checkFooter,
+	checkSearchEngine,
+	checkYouTubeStatisticsGraph,
 } from '../utils/aux_functions'
 
 describe('Navbar', () => {
@@ -63,10 +65,7 @@ describe('Trends Container', () => {
 
 describe('Views Graph', () => {
 	it('Should show the views count graph', () => {
-		cy.visit('/trends/ES/youtube')
-		cy.title().should('eq', 'TopTrends | Spain | YouTube')
-		cy.get('#graphs-container').should('exist')
-		cy.get('#graphs-container').should('be.visible')
+		checkYouTubeStatisticsGraph()
 		cy.get('#views-container').should('exist')
 		cy.get('#views-container').should('be.visible')
 		cy.get('#views-text').should('exist')
@@ -79,10 +78,7 @@ describe('Views Graph', () => {
 
 describe('Likes Graph', () => {
 	it('Should show the likes count graph', () => {
-		cy.visit('/trends/ES/youtube')
-		cy.title().should('eq', 'TopTrends | Spain | YouTube')
-		cy.get('#graphs-container').should('exist')
-		cy.get('#graphs-container').should('be.visible')
+		checkYouTubeStatisticsGraph()
 		cy.get('#likes-container').should('exist')
 		cy.get('#likes-container').should('be.visible')
 		cy.get('#likes-text').should('exist')
@@ -95,10 +91,7 @@ describe('Likes Graph', () => {
 
 describe('Comments Graph', () => {
 	it('Should show the comments count graph', () => {
-		cy.visit('/trends/ES/youtube')
-		cy.title().should('eq', 'TopTrends | Spain | YouTube')
-		cy.get('#graphs-container').should('exist')
-		cy.get('#graphs-container').should('be.visible')
+		checkYouTubeStatisticsGraph()
 		cy.get('#comments-container').should('exist')
 		cy.get('#comments-container').should('be.visible')
 		cy.get('#comments-text').should('exist')

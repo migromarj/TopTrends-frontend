@@ -2,6 +2,7 @@ import {
 	checkNavbar,
 	checkBackground,
 	checkFooter,
+	checkSearchEngine,
 } from '../utils/aux_functions'
 
 describe('Navbar', () => {
@@ -19,12 +20,7 @@ describe('Navbar', () => {
 
 describe('Search engine', () => {
 	it('Should show options for a country', () => {
-		cy.visit('/')
-		cy.wait(3000)
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.get('#autocomplete-1-label').should('exist')
-		cy.get('#autocomplete-1-label').should('be.visible')
-		cy.get('#autocomplete-1-label').should('have.value', '')
+		checkSearchEngine()
 		cy.get('#autocomplete-1-label').type('Spain')
 		cy.get('#autocomplete-1-label').should('have.value', 'Spain')
 		cy.get('#countryList').should('exist')
@@ -38,12 +34,7 @@ describe('Search engine', () => {
 		cy.title().should('eq', 'TopTrends | Spain')
 	})
 	it("Shouldn't show options for a country", () => {
-		cy.visit('/')
-		cy.wait(3000)
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.get('#autocomplete-1-label').should('exist')
-		cy.get('#autocomplete-1-label').should('be.visible')
-		cy.get('#autocomplete-1-label').should('have.value', '')
+		checkSearchEngine()
 		cy.get('#autocomplete-1-label').type('España')
 		cy.wait(3000)
 		cy.get('#autocomplete-1-label').should('have.value', 'España')

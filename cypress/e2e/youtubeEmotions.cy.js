@@ -4,6 +4,9 @@ import {
 	check404,
 	checkBackground,
 	checkFooter,
+	checkYouTubeTrend,
+	checkEmotionGraphs,
+	checkErrorEmotionGraphs,
 } from '../utils/aux_functions'
 
 describe('Navbar', () => {
@@ -15,11 +18,7 @@ describe('Navbar', () => {
 
 describe('Country title', () => {
 	it('Should show title of a country', () => {
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.wait(10000)
-		cy.get('#YouTube-trend-2').should('exist')
-		cy.get('#YouTube-trend-2').should('be.visible')
+		checkYouTubeTrend()
 		cy.get('#YouTube-trend-2').click()
 		cy.wait(10000)
 		checkCountryTitle(
@@ -34,11 +33,7 @@ describe('Country title', () => {
 
 describe('Page content title', () => {
 	it('Should show title of a video', () => {
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.wait(10000)
-		cy.get('#YouTube-trend-2').should('exist')
-		cy.get('#YouTube-trend-2').should('be.visible')
+		checkYouTubeTrend()
 		//Get the text that is in #YouTube-trend-2
 		cy.get('#YouTube-trend-2')
 			.invoke('text')
@@ -77,29 +72,13 @@ describe('Footer', () => {
 
 describe('Emotion Graphs', () => {
 	it('Should show the emotion graphs', () => {
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.wait(10000)
-		cy.get('#YouTube-trend-2').should('exist')
-		cy.get('#YouTube-trend-2').should('be.visible')
+		checkYouTubeTrend()
 		cy.get('#YouTube-trend-2').click()
-		cy.wait(30000)
-		cy.get('#emotion-container').should('exist')
-		cy.get('#emotion-container').should('be.visible')
-		cy.get('#emotion-container-1').should('exist')
-		cy.get('#emotion-container-1').should('be.visible')
-		cy.get('#emotion-container-2').should('exist')
-		cy.get('#emotion-container-2').should('be.visible')
+		checkEmotionGraphs()
 	})
 	it("Shouldn't show the emotion graphs", () => {
 		cy.visit('/trends/ES/youtube/FKSJDHFLSKDJGIUVBSDKL')
 		cy.title().should('eq', 'TopTrends | Spain')
-		cy.wait(30000)
-		cy.get('#emotion-container').should('not.exist')
-		cy.get('#emotion-container-1').should('not.exist')
-		cy.get('#emotion-container-2').should('not.exist')
-		cy.get('#error-container').should('exist')
-		cy.get('#error-container').should('be.visible')
-		cy.get('#error-container').should('include.text', 'Data not found')
+		checkErrorEmotionGraphs()
 	})
 })

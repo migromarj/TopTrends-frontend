@@ -4,6 +4,12 @@ import {
 	check404,
 	checkBackground,
 	checkFooter,
+	checkWordGraphs,
+	checkErrorWordGraphs,
+	checkInterest,
+	checkRelatedTopics,
+	checkEmotionGraphs,
+	checkErrorEmotionGraphs,
 } from '../utils/aux_functions'
 
 describe('Navbar', () => {
@@ -51,32 +57,14 @@ describe('Dropdown Menu', () => {
 
 describe('Word Interest Graph', () => {
 	it('Should show the word interest graph', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#interest-container').should('exist')
-		cy.get('#interest-container').should('be.visible')
-		cy.get('#interest-text').should('exist')
-		cy.get('#interest-text').should('be.visible')
-		cy.get('#interest-text').should('include.text', 'Messi interest')
+		checkWordGraphs()
+		checkInterest('Messi interest')
 		cy.get('#wordInterestGraph').should('exist')
 		cy.get('#wordInterestGraph').should('be.visible')
 	})
 	it("Shouldn't show the word interest topics graph", () => {
-		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
-		cy.wait(10000)
-		cy.title().should('eq', 'TopTrends | Spain | FKSJDHFLSKDJGIUVBSDKL')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#interest-container').should('exist')
-		cy.get('#interest-container').should('be.visible')
-		cy.get('#interest-text').should('exist')
-		cy.get('#interest-text').should('be.visible')
-		cy.get('#interest-text').should(
-			'include.text',
-			'FKSJDHFLSKDJGIUVBSDKL interest'
-		)
+		checkErrorWordGraphs()
+		checkInterest('FKSJDHFLSKDJGIUVBSDKL interest')
 		cy.get('#interest-container').get('#error-container').should('exist')
 		cy.get('#interest-container').get('#error-container').should('be.visible')
 		cy.get('#interest-container').get('#errorIcon').should('exist')
@@ -91,32 +79,14 @@ describe('Word Interest Graph', () => {
 
 describe('Word Related Topics Graph', () => {
 	it('Should show the word related topics graph', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#topics-container').should('exist')
-		cy.get('#topics-container').should('be.visible')
-		cy.get('#topics-text').should('exist')
-		cy.get('#topics-text').should('be.visible')
-		cy.get('#topics-text').should('include.text', 'Messi related topics')
+		checkWordGraphs()
+		checkRelatedTopics('Messi related topics')
 		cy.get('#wordTopicsGraph').should('exist')
 		cy.get('#wordTopicsGraph').should('be.visible')
 	})
 	it("Shouldn't show the word related topics graph", () => {
-		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
-		cy.wait(10000)
-		cy.title().should('eq', 'TopTrends | Spain | FKSJDHFLSKDJGIUVBSDKL')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#topics-container').should('exist')
-		cy.get('#topics-container').should('be.visible')
-		cy.get('#topics-text').should('exist')
-		cy.get('#topics-text').should('be.visible')
-		cy.get('#topics-text').should(
-			'include.text',
-			'FKSJDHFLSKDJGIUVBSDKL related topics'
-		)
+		checkErrorWordGraphs()
+		checkRelatedTopics('FKSJDHFLSKDJGIUVBSDKL related topics')
 		cy.get('#topics-container').get('#error-container').should('exist')
 		cy.get('#topics-container').get('#error-container').should('be.visible')
 		cy.get('#topics-container').get('#errorIcon').should('exist')
@@ -154,13 +124,7 @@ describe('Emotion Graphs', () => {
 		cy.get('#emotion-title').should('exist')
 		cy.get('#emotion-title').should('be.visible')
 		cy.get('#emotion-title').should('include.text', 'Messi emotions')
-		cy.wait(30000)
-		cy.get('#emotion-container').should('exist')
-		cy.get('#emotion-container').should('be.visible')
-		cy.get('#emotion-container-1').should('exist')
-		cy.get('#emotion-container-1').should('be.visible')
-		cy.get('#emotion-container-2').should('exist')
-		cy.get('#emotion-container-2').should('be.visible')
+		checkEmotionGraphs()
 	})
 	it("Shouldn't show the emotion graphs", () => {
 		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
@@ -172,12 +136,6 @@ describe('Emotion Graphs', () => {
 			'include.text',
 			'FKSJDHFLSKDJGIUVBSDKL emotions'
 		)
-		cy.wait(30000)
-		cy.get('#emotion-container').should('not.exist')
-		cy.get('#emotion-container-1').should('not.exist')
-		cy.get('#emotion-container-2').should('not.exist')
-		cy.get('#data-not-found').should('exist')
-		cy.get('#data-not-found').should('be.visible')
-		cy.get('#data-not-found').should('include.text', 'Data not found')
+		checkErrorEmotionGraphs()
 	})
 })
