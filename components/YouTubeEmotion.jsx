@@ -1,20 +1,10 @@
-import { gql, useQuery } from '@apollo/client'
 import Emotion from './Emotion'
 import Loading from './Loading'
 import Error from './Error'
+import { useSpecificYouTubeVideo } from '../services/services'
 
 export default function YouTubeEmotion(props) {
-	const GET_SPECIFIC_YOUTUBE_VIDEO = gql`
-		query GetSpecificYouTubeVideo($videoId: String!) {
-			youTubeVideo(videoId: $videoId) {
-				title
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_SPECIFIC_YOUTUBE_VIDEO, {
-		variables: { videoId: props.videoId },
-	})
+	const { data, loading, error } = useSpecificYouTubeVideo(props)
 
 	if (loading) {
 		return <Loading />

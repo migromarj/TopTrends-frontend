@@ -1,40 +1,12 @@
 import { CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
-import { gql, useQuery } from '@apollo/client'
 import { Pie } from 'react-chartjs-2'
 import Loading from './Loading'
 import Error from './Error'
+import { useWordTopics } from '../services/services'
 
 export default function WordTopicsGraph(props) {
-	const GET_WORD_TOPICS = gql`
-		query GetWordTopics(
-			$word: String!
-			$country: String!
-			$periodType: String!
-			$topicsNumber: Int!
-		) {
-			wordRelatedTopics(
-				word: $word
-				country: $country
-				periodType: $periodType
-				topicsNumber: $topicsNumber
-			) {
-				id
-				topicTitle
-				topicType
-				value
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_WORD_TOPICS, {
-		variables: {
-			word: props.word,
-			country: props.country,
-			periodType: props.period,
-			topicsNumber: 5,
-		},
-	})
+	const { data, loading, error } = useWordTopics(props)
 
 	if (loading || error) {
 		return (

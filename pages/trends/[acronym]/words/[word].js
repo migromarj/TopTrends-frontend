@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
 import WordInterestGraph from '../../../../components/WordInterestGraph.jsx'
 import WordTopicsGraph from '../../../../components/WordTopicsGraph.jsx'
 import Title from '../../../../components/Title.jsx'
@@ -10,6 +9,7 @@ import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404.jsx'
 import Head from 'next/head.js'
 import Emotion from '../../../../components/Emotion.jsx'
+import { useSpecificCountry } from '../../../../services/services.js'
 
 import dynamic from 'next/dynamic'
 
@@ -29,20 +29,7 @@ export default function WordTrends() {
 		setPeriod(e.target.value)
 	}
 
-	const GET_SPECIFIC_COUNTRY = gql`
-		query GetSpecificCountry($acronym: String) {
-			allCountries(acronym: $acronym) {
-				name
-				flag
-				lat
-				lng
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_SPECIFIC_COUNTRY, {
-		variables: { acronym },
-	})
+	const { data, loading, error } = useSpecificCountry(acronym)
 
 	if (loading) {
 		return (

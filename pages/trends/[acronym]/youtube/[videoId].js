@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router'
-import { gql, useQuery } from '@apollo/client'
 import Title from '../../../../components/Title.jsx'
 import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404.jsx'
@@ -7,26 +6,14 @@ import Head from 'next/head.js'
 import YouTubeEmotion from '../../../../components/YouTubeEmotion.jsx'
 import EarthMap from '../../../../components/EarthMap.jsx'
 import LoadingError from '../../../../components/LoadingError.jsx'
+import { useSpecificCountry } from '../../../../services/services.js'
 
 export default function WordTrends() {
 	const router = useRouter()
 	const { acronym } = router.query
 	const { videoId } = router.query
 
-	const GET_SPECIFIC_COUNTRY = gql`
-		query GetSpecificCountry($acronym: String) {
-			allCountries(acronym: $acronym) {
-				name
-				flag
-				lat
-				lng
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_SPECIFIC_COUNTRY, {
-		variables: { acronym },
-	})
+	const { data, loading, error } = useSpecificCountry(acronym)
 
 	if (loading || error) {
 		return <LoadingError loading={loading} error={error} />
