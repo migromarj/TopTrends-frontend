@@ -1,36 +1,12 @@
 import { CategoryScale } from 'chart.js'
 import Chart from 'chart.js/auto'
-import { gql, useQuery } from '@apollo/client'
 import { Line } from 'react-chartjs-2'
 import Loading from './Loading'
 import Error from './Error'
+import { useWordInterest } from '../services/services'
 
 export default function WordInterestGraph(props) {
-	const GET_WORD_INTEREST = gql`
-		query GetWordInterest(
-			$word: String!
-			$country: String!
-			$periodType: String!
-		) {
-			wordGoogleTrends(
-				word: $word
-				country: $country
-				periodType: $periodType
-			) {
-				id
-				trendDatetime
-				value
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_WORD_INTEREST, {
-		variables: {
-			word: props.word,
-			country: props.country,
-			periodType: props.period,
-		},
-	})
+	const { data, loading, error } = useWordInterest(props)
 
 	Chart.register(CategoryScale)
 

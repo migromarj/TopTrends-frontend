@@ -1,5 +1,5 @@
 import { MagnifyingGlass } from 'react-loader-spinner'
-import WebIcon from './WebIcon'
+import TitleContainer from './TitleContainer'
 
 export default function Loading(props) {
 	if (props.background) {
@@ -12,10 +12,7 @@ export default function Loading(props) {
 
 	return (
 		<div className={`m-3 ${props.container ? 'w-96' : 'flex justify-center'}`}>
-			<div className='flex items-center justify-center'>
-				<WebIcon name={props.name} />
-				<h2 className='text-2xl font-bold text-white'>{props.name}</h2>
-			</div>
+			<TitleContainer name={props.name} />
 			<div
 				className={`rounded-xl p-3 ${
 					props.container ? 'bg-purple-400 bg-opacity-20' : ''

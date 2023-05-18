@@ -1,34 +1,32 @@
+import {
+	checkNavbar,
+	checkCountryTitle,
+	check404,
+	checkBackground,
+	checkFooter,
+	checkWordGraphs,
+	checkErrorWordGraphs,
+	checkInterest,
+	checkRelatedTopics,
+	checkEmotionGraphs,
+	checkErrorEmotionGraphs,
+} from '../utils/aux_functions'
+
 describe('Navbar', () => {
 	it('Should show the navbar', () => {
 		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#navBar').should('exist')
-		cy.get('#navBar').should('be.visible')
-		cy.get('#brandIcon').should('exist')
-		cy.get('#brandIcon').should('be.visible')
-		cy.get('#brand').should('exist')
-		cy.get('#brand').should('be.visible')
-		cy.get('#brand').should('include.text', 'TopTrends')
+		checkNavbar('TopTrends | Spain | Messi')
 	})
 })
 
 describe('Country title', () => {
 	it('Should show title of a country', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#countryTitle').should('exist')
-		cy.get('#countryTitle').should('be.visible')
-		cy.get('#countryFlag').should('exist')
-		cy.get('#countryFlag').should('be.visible')
-		cy.get('#countryName').should('exist')
-		cy.get('#countryName').should('be.visible')
-		cy.get('#countryName').should('have.text', 'Spain')
-		cy.get('#previousPage').should('exist')
-		cy.get('#previousPage').should('be.visible')
-		cy.get('#previousPage').click()
-		cy.wait(5000)
-		cy.url().should('include', '/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
+		checkCountryTitle(
+			'/trends/ES/words/Messi',
+			'TopTrends | Spain | Messi',
+			'/trends/ES',
+			'TopTrends | Spain'
+		)
 	})
 })
 
@@ -59,32 +57,14 @@ describe('Dropdown Menu', () => {
 
 describe('Word Interest Graph', () => {
 	it('Should show the word interest graph', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#interest-container').should('exist')
-		cy.get('#interest-container').should('be.visible')
-		cy.get('#interest-text').should('exist')
-		cy.get('#interest-text').should('be.visible')
-		cy.get('#interest-text').should('include.text', 'Messi interest')
+		checkWordGraphs()
+		checkInterest('Messi interest')
 		cy.get('#wordInterestGraph').should('exist')
 		cy.get('#wordInterestGraph').should('be.visible')
 	})
 	it("Shouldn't show the word interest topics graph", () => {
-		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
-		cy.wait(10000)
-		cy.title().should('eq', 'TopTrends | Spain | FKSJDHFLSKDJGIUVBSDKL')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#interest-container').should('exist')
-		cy.get('#interest-container').should('be.visible')
-		cy.get('#interest-text').should('exist')
-		cy.get('#interest-text').should('be.visible')
-		cy.get('#interest-text').should(
-			'include.text',
-			'FKSJDHFLSKDJGIUVBSDKL interest'
-		)
+		checkErrorWordGraphs()
+		checkInterest('FKSJDHFLSKDJGIUVBSDKL interest')
 		cy.get('#interest-container').get('#error-container').should('exist')
 		cy.get('#interest-container').get('#error-container').should('be.visible')
 		cy.get('#interest-container').get('#errorIcon').should('exist')
@@ -99,32 +79,14 @@ describe('Word Interest Graph', () => {
 
 describe('Word Related Topics Graph', () => {
 	it('Should show the word related topics graph', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#topics-container').should('exist')
-		cy.get('#topics-container').should('be.visible')
-		cy.get('#topics-text').should('exist')
-		cy.get('#topics-text').should('be.visible')
-		cy.get('#topics-text').should('include.text', 'Messi related topics')
+		checkWordGraphs()
+		checkRelatedTopics('Messi related topics')
 		cy.get('#wordTopicsGraph').should('exist')
 		cy.get('#wordTopicsGraph').should('be.visible')
 	})
 	it("Shouldn't show the word related topics graph", () => {
-		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
-		cy.wait(10000)
-		cy.title().should('eq', 'TopTrends | Spain | FKSJDHFLSKDJGIUVBSDKL')
-		cy.get('#word-graphs').should('exist')
-		cy.get('#word-graphs').should('be.visible')
-		cy.get('#topics-container').should('exist')
-		cy.get('#topics-container').should('be.visible')
-		cy.get('#topics-text').should('exist')
-		cy.get('#topics-text').should('be.visible')
-		cy.get('#topics-text').should(
-			'include.text',
-			'FKSJDHFLSKDJGIUVBSDKL related topics'
-		)
+		checkErrorWordGraphs()
+		checkRelatedTopics('FKSJDHFLSKDJGIUVBSDKL related topics')
 		cy.get('#topics-container').get('#error-container').should('exist')
 		cy.get('#topics-container').get('#error-container').should('be.visible')
 		cy.get('#topics-container').get('#errorIcon').should('exist')
@@ -139,35 +101,19 @@ describe('Word Related Topics Graph', () => {
 
 describe('404 page', () => {
 	it('Should show 404 page', () => {
-		cy.visit('/trends/NotCountry/words/Messi')
-		cy.wait(5000)
-		cy.title().should('eq', 'TopTrends | Country not found')
-		cy.get('#not-found-container').should('exist')
-		cy.get('#not-found-container').should('be.visible')
-		cy.get('#error-icon').should('exist')
-		cy.get('#error-icon').should('be.visible')
-		cy.get('#not-found-text').should('exist')
-		cy.get('#not-found-text').should('be.visible')
-		cy.get('#not-found-text').should('include.text', 'Country not found')
+		check404('/trends/NotCountry/words/Messi')
 	})
 })
 
 describe('Background', () => {
 	it('It should show the background', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.get('#background').should('exist')
+		checkBackground('/trends/ES/words/Messi', 'TopTrends | Spain | Messi')
 	})
 })
 
 describe('Footer', () => {
 	it('Should show the footer', () => {
-		cy.visit('/trends/ES/words/Messi')
-		cy.title().should('eq', 'TopTrends | Spain | Messi')
-		cy.wait(5000)
-		cy.get('#footer').should('exist')
-		cy.get('#footer').should('be.visible')
-		cy.get('#footer').should('include.text', 'Designed by Miguel Romero Arjona')
+		checkFooter('/trends/ES/words/Messi', 'TopTrends | Spain | Messi')
 	})
 })
 
@@ -178,13 +124,7 @@ describe('Emotion Graphs', () => {
 		cy.get('#emotion-title').should('exist')
 		cy.get('#emotion-title').should('be.visible')
 		cy.get('#emotion-title').should('include.text', 'Messi emotions')
-		cy.wait(30000)
-		cy.get('#emotion-container').should('exist')
-		cy.get('#emotion-container').should('be.visible')
-		cy.get('#emotion-container-1').should('exist')
-		cy.get('#emotion-container-1').should('be.visible')
-		cy.get('#emotion-container-2').should('exist')
-		cy.get('#emotion-container-2').should('be.visible')
+		checkEmotionGraphs()
 	})
 	it("Shouldn't show the emotion graphs", () => {
 		cy.visit('/trends/ES/words/FKSJDHFLSKDJGIUVBSDKL')
@@ -196,12 +136,6 @@ describe('Emotion Graphs', () => {
 			'include.text',
 			'FKSJDHFLSKDJGIUVBSDKL emotions'
 		)
-		cy.wait(30000)
-		cy.get('#emotion-container').should('not.exist')
-		cy.get('#emotion-container-1').should('not.exist')
-		cy.get('#emotion-container-2').should('not.exist')
-		cy.get('#data-not-found').should('exist')
-		cy.get('#data-not-found').should('be.visible')
-		cy.get('#data-not-found').should('include.text', 'Data not found')
+		checkErrorEmotionGraphs()
 	})
 })

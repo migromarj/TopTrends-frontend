@@ -1,8 +1,8 @@
 import { useMemo, useRef, useState } from 'react'
 import { createAutocomplete } from '@algolia/autocomplete-core'
-import { gql, useQuery } from '@apollo/client'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useCountries } from '../services/services'
 
 const AutocompleteItem = ({ name, acronym, flag, woeid, pn }) => {
 	return (
@@ -57,25 +57,13 @@ const AutocompleteItem = ({ name, acronym, flag, woeid, pn }) => {
 	)
 }
 
-const GET_ALL_COUNTRIES = gql`
-	query {
-		allCountries {
-			name
-			acronym
-			flag
-			woeid
-			pn
-		}
-	}
-`
-
 export default function Search(props) {
 	const [autocompleteState, setAutocompleteState] = useState({
 		collections: [],
 		isOpen: false,
 	})
 
-	const { data } = useQuery(GET_ALL_COUNTRIES)
+	const { data } = useCountries()
 
 	const autocomplete = useMemo(
 		() =>

@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import { gql, useQuery } from '@apollo/client'
 import YouTubePieGraph from '../../../../components/YouTubePieGraph'
 import Title from '../../../../components/Title'
 import Loading from '../../../../components/Loading'
@@ -9,6 +8,10 @@ import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404'
 import YouTubeVideoContainer from '../../../../components/YouTubeVideoContainer'
 import Head from 'next/head.js'
+import {
+	useSpecificCountry,
+	useCountryYouTubeTrends,
+} from '../../../../services/services'
 
 import dynamic from 'next/dynamic'
 
@@ -27,20 +30,7 @@ export default function YouTubeStaistics() {
 		setType(e.target.value)
 	}
 
-	const GET_SPECIFIC_COUNTRY = gql`
-		query GetSpecificCountry($acronym: String) {
-			allCountries(acronym: $acronym) {
-				name
-				flag
-				lat
-				lng
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_SPECIFIC_COUNTRY, {
-		variables: { acronym },
-	})
+	const { data, loading, error } = useSpecificCountry(acronym)
 
 	if (loading) {
 		return (
@@ -108,29 +98,7 @@ export default function YouTubeStaistics() {
 }
 
 function YouTubeGraph(props) {
-	const GET_COUNTRY_YOUTUBE_TRENDS = gql`
-		query GetCountryYouTubeTrends(
-			$country: String!
-			$trendType: String!
-			$trendsNumber: Int!
-		) {
-			countryYouTubeTrends(
-				country: $country
-				trendType: $trendType
-				trendsNumber: $trendsNumber
-			) {
-				id
-				title
-				viewCount
-				likeCount
-				commentCount
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_COUNTRY_YOUTUBE_TRENDS, {
-		variables: { country: props.name, trendType: props.type, trendsNumber: 5 },
-	})
+	const { data, loading, error } = useCountryYouTubeTrends(props, 5)
 
 	if (loading) return <Loading />
 	if (error) return <Error />

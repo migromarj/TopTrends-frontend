@@ -1,17 +1,17 @@
+import {
+	checkNavbar,
+	checkBackground,
+	checkFooter,
+	checkSearchEngine,
+} from '../utils/aux_functions'
+
 describe('Navbar', () => {
 	it('Should show the navbar', () => {
 		cy.visit('/')
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.get('#navBar').should('exist')
-		cy.get('#navBar').should('be.visible')
-		cy.get('#brandIcon').should('exist')
-		cy.get('#brandIcon').should('be.visible')
+		checkNavbar('TopTrends | Home')
 		cy.get('#brandIcon').click()
 		cy.url().should('include', '/')
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.get('#brand').should('exist')
-		cy.get('#brand').should('be.visible')
-		cy.get('#brand').should('have.text', 'TopTrends')
+		checkNavbar('TopTrends | Home')
 		cy.get('#brand').click()
 		cy.url().should('include', '/')
 		cy.title().should('eq', 'TopTrends | Home')
@@ -20,12 +20,7 @@ describe('Navbar', () => {
 
 describe('Search engine', () => {
 	it('Should show options for a country', () => {
-		cy.visit('/')
-		cy.wait(3000)
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.get('#autocomplete-1-label').should('exist')
-		cy.get('#autocomplete-1-label').should('be.visible')
-		cy.get('#autocomplete-1-label').should('have.value', '')
+		checkSearchEngine()
 		cy.get('#autocomplete-1-label').type('Spain')
 		cy.get('#autocomplete-1-label').should('have.value', 'Spain')
 		cy.get('#countryList').should('exist')
@@ -39,12 +34,9 @@ describe('Search engine', () => {
 		cy.title().should('eq', 'TopTrends | Spain')
 	})
 	it("Shouldn't show options for a country", () => {
-		cy.visit('/')
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.get('#autocomplete-1-label').should('exist')
-		cy.get('#autocomplete-1-label').should('be.visible')
-		cy.get('#autocomplete-1-label').should('have.value', '')
+		checkSearchEngine()
 		cy.get('#autocomplete-1-label').type('España')
+		cy.wait(3000)
 		cy.get('#autocomplete-1-label').should('have.value', 'España')
 		cy.get('#countryList').should('not.exist')
 	})
@@ -52,21 +44,13 @@ describe('Search engine', () => {
 
 describe('Background', () => {
 	it('It should show the background', () => {
-		cy.visit('/')
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.wait(5000)
-		cy.get('#background').should('exist')
+		checkBackground('/', 'TopTrends | Home')
 		cy.get('#background').should('be.visible')
 	})
 })
 
 describe('Footer', () => {
 	it('Should show the footer', () => {
-		cy.visit('/')
-		cy.title().should('eq', 'TopTrends | Home')
-		cy.wait(5000)
-		cy.get('#footer').should('exist')
-		cy.get('#footer').should('be.visible')
-		cy.get('#footer').should('include.text', 'Designed by Miguel Romero Arjona')
+		checkFooter('/', 'TopTrends | Home')
 	})
 })

@@ -1,30 +1,26 @@
+import {
+	checkNavbar,
+	checkCountryTitle,
+	check404,
+	checkBackground,
+	checkFooter,
+} from '../utils/aux_functions'
+
 describe('Navbar', () => {
 	it('Should show the navbar', () => {
 		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#navBar').should('exist')
-		cy.get('#navBar').should('be.visible')
-		cy.get('#brandIcon').should('exist')
-		cy.get('#brandIcon').should('be.visible')
-		cy.get('#brand').should('exist')
-		cy.get('#brand').should('be.visible')
-		cy.get('#brand').should('have.text', 'TopTrends')
+		checkNavbar('TopTrends | Spain')
 	})
 })
 
 describe('Country title', () => {
 	it('Should show title of a country', () => {
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#countryTitle').should('exist')
-		cy.get('#countryTitle').should('be.visible')
-		cy.get('#countryFlag').should('exist')
-		cy.get('#countryFlag').should('be.visible')
-		cy.get('#countryName').should('exist')
-		cy.get('#countryName').should('be.visible')
-		cy.get('#countryName').should('have.text', 'Spain')
-		cy.get('#previousPage').should('exist')
-		cy.get('#previousPage').should('be.visible')
+		checkCountryTitle(
+			'/trends/ES',
+			'TopTrends | Spain',
+			'/',
+			'TopTrends | Home'
+		)
 	})
 })
 
@@ -140,35 +136,18 @@ describe('YouTube container', () => {
 
 describe('404 page', () => {
 	it('Should show 404 page', () => {
-		cy.visit('/trends/NotCountry')
-		cy.wait(5000)
-		cy.title().should('eq', 'TopTrends | Country not found')
-		cy.get('#not-found-container').should('exist')
-		cy.get('#not-found-container').should('be.visible')
-		cy.get('#error-icon').should('exist')
-		cy.get('#error-icon').should('be.visible')
-		cy.get('#not-found-text').should('exist')
-		cy.get('#not-found-text').should('be.visible')
-		cy.get('#not-found-text').should('include.text', 'Country not found')
+		check404('/trends/NotCountry')
 	})
 })
 
 describe('Background', () => {
 	it('It should show the background', () => {
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.get('#background').should('exist')
-		cy.get('#background').should('be.visible')
+		checkBackground('/trends/ES', 'TopTrends | Spain')
 	})
 })
 
 describe('Footer', () => {
 	it('Should show the footer', () => {
-		cy.visit('/trends/ES')
-		cy.title().should('eq', 'TopTrends | Spain')
-		cy.wait(5000)
-		cy.get('#footer').should('exist')
-		cy.get('#footer').should('be.visible')
-		cy.get('#footer').should('include.text', 'Designed by Miguel Romero Arjona')
+		checkFooter('/trends/ES', 'TopTrends | Spain')
 	})
 })

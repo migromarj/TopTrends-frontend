@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { useRouter } from 'next/router'
-import { gql, useQuery } from '@apollo/client'
 import Title from '../../components/Title.jsx'
 import TrendsContainer from '../../components/TrendsContainer.jsx'
 import { useState, useEffect } from 'react'
@@ -10,13 +9,13 @@ import Link from 'next/link'
 import WebIcon from '../../components/WebIcon.jsx'
 import Footer from '../../components/Footer.jsx'
 import Country404 from '../../components/Country404.jsx'
-
-import dynamic from 'next/dynamic'
-
-const Earth = dynamic(() => import('../../components/Earth.jsx'), {
-	ssr: false,
-})
-//import Earth from '../../components/Earth.jsx'
+import EarthMap from '../../components/EarthMap.jsx'
+import {
+	useSpecificCountry,
+	useCountryTwitterTrends,
+	useCountryGoogleTrends,
+	useCountryYouTubeTrends,
+} from '../../services/services.js'
 
 export default function Country() {
 	const router = useRouter()
@@ -40,22 +39,7 @@ export default function Country() {
 		}
 	}, [])
 
-	const GET_SPECIFIC_COUNTRY = gql`
-		query GetSpecificCountry($acronym: String) {
-			allCountries(acronym: $acronym) {
-				name
-				flag
-				woeid
-				pn
-				lat
-				lng
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_SPECIFIC_COUNTRY, {
-		variables: { acronym },
-	})
+	const { data, loading, error } = useSpecificCountry(acronym)
 
 	if (loading) {
 		return (
@@ -100,10 +84,7 @@ export default function Country() {
 				</Head>
 				<main>
 					<div>
-						<div className='fixed'>
-							<Earth autoFocus lat={lat} lng={lng} />
-						</div>
-						<div className='absolute w-full'>
+						<EarthMap lat={lat} lng={lng}>
 							<Title name={name} flag={flag} />
 
 							<div
@@ -141,7 +122,7 @@ export default function Country() {
 							<div className={`${visible ? 'block' : 'hidden'}`}>
 								<Footer />
 							</div>
-						</div>
+						</EarthMap>
 					</div>
 				</main>
 			</div>
@@ -150,18 +131,7 @@ export default function Country() {
 }
 
 function TwitterTrends(props) {
-	const GET_COUNTRY_TWITTER_TRENDS = gql`
-		query GetCountryTwitterTrends($country: String!, $trendsNumber: Int!) {
-			countryTwitterTrends(country: $country, trendsNumber: $trendsNumber) {
-				id
-				name
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_COUNTRY_TWITTER_TRENDS, {
-		variables: { country: props.name, trendsNumber: 10 },
-	})
+	const { data, loading, error } = useCountryTwitterTrends(props)
 
 	if (loading) return <Loading container name='Twitter' />
 	if (error) return <Error container name='Twitter' />
@@ -175,18 +145,7 @@ function TwitterTrends(props) {
 }
 
 function GoogleTrends(props) {
-	const GET_COUNTRY_GOOGLE_TRENDS = gql`
-		query GetCountryGoogleTrends($country: String!, $trendsNumber: Int!) {
-			countryGoogleTrends(country: $country, trendsNumber: $trendsNumber) {
-				id
-				name
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_COUNTRY_GOOGLE_TRENDS, {
-		variables: { country: props.name, trendsNumber: 10 },
-	})
+	const { data, loading, error } = useCountryGoogleTrends(props)
 
 	if (loading) return <Loading container name='Google' />
 	if (error) return <Error container name='Google' />
@@ -201,28 +160,7 @@ function GoogleTrends(props) {
 }
 
 function YouTubeTrends(props) {
-	const GET_COUNTRY_YOUTUBE_TRENDS = gql`
-		query GetCountryYouTubeTrends(
-			$country: String!
-			$trendType: String!
-			$trendsNumber: Int!
-		) {
-			countryYouTubeTrends(
-				country: $country
-				trendType: $trendType
-				trendsNumber: $trendsNumber
-			) {
-				id
-				title
-				videoId
-				thumbnail
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_COUNTRY_YOUTUBE_TRENDS, {
-		variables: { country: props.name, trendType: props.type, trendsNumber: 10 },
-	})
+	const { data, loading, error } = useCountryYouTubeTrends(props)
 
 	if (loading) return <Loading container />
 	if (error) return <Error container />
