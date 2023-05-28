@@ -14,7 +14,7 @@ export default function WordInterestGraph(props) {
 		return (
 			<div className='w-5/12'>
 				<div className='flex w-full flex-col justify-center'>
-					<h1 className='my-2 text-center text-xl font-bold '>
+					<h1 className='my-2 text-center text-2xl font-bold '>
 						<span className='text-purple-400'>{props.title} </span>
 						<span className='text-white'>interest 📈</span>
 					</h1>
@@ -90,7 +90,7 @@ export default function WordInterestGraph(props) {
 				data.wordGoogleTrends.length === 0 ? 'lg:w-1/2' : 'lg:w-7/12'
 			}`}
 		>
-			<h1 id='interest-text' className='my-2 text-center text-xl font-bold '>
+			<h1 id='interest-text' className='my-2 text-center text-2xl font-bold '>
 				<span className='text-purple-400'>{props.title} </span>
 				<span className='text-white'>interest 📈</span>
 			</h1>

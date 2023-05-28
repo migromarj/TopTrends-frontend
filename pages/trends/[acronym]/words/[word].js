@@ -104,7 +104,7 @@ export default function WordTrends() {
 							<div className='mt-20 mb-10 flex w-full flex-col justify-center'>
 								<h1
 									id='emotion-title'
-									className='my-2 text-center text-xl font-bold '
+									className='my-2 text-center text-2xl font-bold '
 								>
 									<span className='text-purple-400'>{word} </span>
 									<span className='text-white'>emotions 😊</span>

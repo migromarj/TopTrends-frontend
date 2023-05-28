@@ -31,7 +31,7 @@ describe('Country title', () => {
 	})
 })
 
-describe('Page content title', () => {
+describe('Page content titles', () => {
 	it('Should show title of a video', () => {
 		checkYouTubeTrend()
 		cy.get('#YouTube-trend-2')
@@ -44,20 +44,6 @@ describe('Page content title', () => {
 				cy.get('#details-video-title').should('exist')
 				cy.get('#details-video-title').should('be.visible')
 				cy.get('#details-video-title').should('include.text', title)
-			})
-	})
-})
-
-describe('Video section content title', () => {
-	it('Should show title of a video', () => {
-		checkYouTubeTrend()
-		cy.get('#YouTube-trend-2')
-			.invoke('text')
-			.then(title => {
-				title = title.substring(5, title.length - 1)
-				cy.get('#YouTube-trend-2').click()
-				cy.wait(30000)
-				cy.title().should('eq', 'TopTrends | Spain')
 				cy.get('#video-emotions-title').should('exist')
 				cy.get('#video-emotions-title').should('be.visible')
 				cy.get('#video-emotions-title').should('include.text', 'Emotions')
