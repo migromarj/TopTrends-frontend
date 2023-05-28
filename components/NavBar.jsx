@@ -1,11 +1,13 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function NavBar() {
+export default function NavBar(props) {
 	return (
 		<div
 			id='navBar'
-			className='h-15 absolute z-30 flex w-full items-center justify-center text-white'
+			className={`h-15 absolute ${
+				props.zIndex ? 'z-0' : 'z-30'
+			} flex w-full items-center justify-center text-white`}
 		>
 			<Link href='/' className='flex items-center py-2'>
 				<Image

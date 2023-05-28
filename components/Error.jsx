@@ -16,10 +16,17 @@ export default function Error(props) {
 	}
 
 	return (
-		<div id='error-container' className='flex w-full justify-center'>
+		<div
+			id='error-container'
+			className={`flex ${props.name ? '' : 'w-full'} justify-center`}
+		>
 			<div className='m-3 w-96'>
 				<TitleContainer name={props.name} />
-				<div className='rounded-xl bg-purple-400 bg-opacity-20 p-3'>
+				<div
+					className={`${
+						props.name ? '' : ''
+					} rounded-xl bg-purple-400 bg-opacity-20 p-3`}
+				>
 					<div className='flex items-center justify-center'>
 						<Image
 							id='errorIcon'

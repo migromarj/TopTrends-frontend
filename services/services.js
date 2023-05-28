@@ -167,6 +167,13 @@ const GET_SPECIFIC_YOUTUBE_VIDEO = gql`
 	query GetSpecificYouTubeVideo($videoId: String!) {
 		youTubeVideo(videoId: $videoId) {
 			title
+			description
+			thumbnail
+			publishedAt
+			viewCount
+			likeCount
+			commentCount
+			channelTitle
 		}
 	}
 `
@@ -174,6 +181,28 @@ const GET_SPECIFIC_YOUTUBE_VIDEO = gql`
 function useSpecificYouTubeVideo(props) {
 	const { data, loading, error } = useQuery(GET_SPECIFIC_YOUTUBE_VIDEO, {
 		variables: { videoId: props.videoId },
+	})
+	return { data, loading, error }
+}
+
+const GET_TREND_EMOTION = gql`
+	query GetTrendEmotions($word: String, $videoId: String) {
+		trendEmotions(word: $word, videoId: $videoId) {
+			sadnessEmotion
+			joyEmotion
+			fearEmotion
+			angerEmotion
+			loveEmotion
+			surpriseEmotion
+			negativeEmotion
+			positiveEmotion
+		}
+	}
+`
+
+function useTrendEmotion(props) {
+	const { data, loading, error } = useQuery(GET_TREND_EMOTION, {
+		variables: { word: props.word, videoId: props.videoId },
 	})
 
 	return { data, loading, error }
@@ -188,4 +217,5 @@ export {
 	useWordInterest,
 	useWordTopics,
 	useSpecificYouTubeVideo,
+	useTrendEmotion,
 }

@@ -130,3 +130,5 @@ function parseDate(datetime) {
 		minutes
 	)
 }
+
+export { parseDate }

@@ -12,13 +12,7 @@ import {
 	useSpecificCountry,
 	useCountryYouTubeTrends,
 } from '../../../../services/services'
-
-import dynamic from 'next/dynamic'
-
-const Earth = dynamic(() => import('../../../../components/Earth.jsx'), {
-	ssr: false,
-})
-//import Earth from '../../../../components/Earth.jsx'
+import Earth from '../../../../components/Earth.jsx'
 
 export default function YouTubeStaistics() {
 	const router = useRouter()
@@ -63,8 +57,6 @@ export default function YouTubeStaistics() {
 		}
 		const name = data.allCountries[0].name
 		const flag = data.allCountries[0].flag
-		const lat = data.allCountries[0].lat
-		const lng = data.allCountries[0].lng
 
 		return (
 			<div>
@@ -73,8 +65,8 @@ export default function YouTubeStaistics() {
 				</Head>
 				<main>
 					<div>
-						<div className='fixed'>
-							<Earth autoFocus lat={lat} lng={lng} />
+						<div className='fixed h-screen w-screen'>
+							<Earth />
 						</div>
 						<div className='absolute flex w-full flex-col'>
 							<Title name={name} flag={flag} code={acronym} />

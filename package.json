@@ -26,6 +26,7 @@
 		"react-dom": "18.2.0",
 		"react-globe.gl": "2.23.3",
 		"react-loader-spinner": "5.3.4",
+		"react-modal": "^3.16.1",
 		"three": "0.150.1"
 	},
 	"devDependencies": {

@@ -3,9 +3,9 @@ import Title from '../../../../components/Title.jsx'
 import Footer from '../../../../components/Footer.jsx'
 import Country404 from '../../../../components/Country404.jsx'
 import Head from 'next/head.js'
-import YouTubeEmotion from '../../../../components/YouTubeEmotion.jsx'
 import EarthMap from '../../../../components/EarthMap.jsx'
 import LoadingError from '../../../../components/LoadingError.jsx'
+import YouTubeData from '../../../../components/YouTubeData.jsx'
 import { useSpecificCountry } from '../../../../services/services.js'
 
 export default function WordTrends() {
@@ -36,8 +36,8 @@ export default function WordTrends() {
 				<main>
 					<div>
 						<EarthMap lat={lat} lng={lng}>
-							<Title name={countryName} flag={flag} code={acronym} />
-							<YouTubeEmotion videoId={videoId} />
+							<Title name={countryName} flag={flag} code={acronym} zIndex />
+							<YouTubeData videoId={videoId} />
 							<Footer />
 						</EarthMap>
 					</div>

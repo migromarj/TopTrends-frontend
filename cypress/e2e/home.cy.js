@@ -45,7 +45,6 @@ describe('Search engine', () => {
 describe('Background', () => {
 	it('It should show the background', () => {
 		checkBackground('/', 'TopTrends | Home')
-		cy.get('#background').should('be.visible')
 	})
 })
 
