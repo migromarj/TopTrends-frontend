@@ -110,7 +110,7 @@ function YouTubeGraph(props) {
 					<div id='views-container' className='mt-5 flex flex-col'>
 						<h2
 							id='views-text'
-							className='text-center text-xl font-bold text-white'
+							className='text-center text-2xl font-bold text-white'
 						>
 							Views 👁️
 						</h2>
@@ -123,7 +123,7 @@ function YouTubeGraph(props) {
 					<div id='likes-container' className='mt-5 flex flex-col'>
 						<h2
 							id='likes-text'
-							className='text-center text-xl font-bold text-white'
+							className='text-center text-2xl font-bold text-white'
 						>
 							Likes 👍
 						</h2>
@@ -137,7 +137,7 @@ function YouTubeGraph(props) {
 					<div id='comments-container' className='mt-5 flex flex-col'>
 						<h2
 							id='comments-text'
-							className='text-center text-xl font-bold text-white'
+							className='text-center text-2xl font-bold text-white'
 						>
 							Comments 💬
 						</h2>

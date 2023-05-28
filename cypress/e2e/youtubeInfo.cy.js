@@ -4,7 +4,6 @@ import {
 	check404,
 	checkBackground,
 	checkFooter,
-	checkSearchEngine,
 	checkYouTubeStatisticsGraph,
 } from '../utils/aux_functions'
 

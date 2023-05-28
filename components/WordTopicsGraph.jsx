@@ -12,7 +12,7 @@ export default function WordTopicsGraph(props) {
 		return (
 			<div className='w-5/12'>
 				<div className='flex w-full flex-col justify-center'>
-					<h1 className='my-2 text-center text-xl font-bold '>
+					<h1 className='my-2 text-center text-2xl font-bold '>
 						<span className='text-purple-400'>{props.title} </span>
 						<span className='text-white'>related topics 🔍</span>
 					</h1>
@@ -70,7 +70,7 @@ export default function WordTopicsGraph(props) {
 				data.wordRelatedTopics.length === 0 ? 'lg:w-1/2' : 'lg:w-4/12'
 			}`}
 		>
-			<h1 id='topics-text' className='my-2 text-center text-xl font-bold'>
+			<h1 id='topics-text' className='my-2 text-center text-2xl font-bold'>
 				<span className='text-purple-400'>{props.title} </span>
 				<span className='text-white'>related topics 🔍</span>
 			</h1>

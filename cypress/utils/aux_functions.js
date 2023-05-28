@@ -1,4 +1,5 @@
 function checkNavbar(title) {
+	cy.wait(3000)
 	cy.title().should('eq', title)
 	cy.get('#navBar').should('exist')
 	cy.get('#navBar').should('be.visible')
