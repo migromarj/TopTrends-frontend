@@ -32,7 +32,7 @@ export default function Country() {
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
 			setVisible(true)
-		}, 3000)
+		}, 0)
 
 		return () => {
 			clearTimeout(timeoutId)
@@ -86,7 +86,6 @@ export default function Country() {
 					<div>
 						<EarthMap lat={lat} lng={lng}>
 							<Title name={name} flag={flag} />
-
 							<div
 								className={`mt-4 flex flex-wrap justify-around ${
 									visible ? 'block' : 'hidden'
@@ -110,7 +109,7 @@ export default function Country() {
 										<Link
 											id='YouTube-more-info'
 											href={`/trends/${acronym}/youtube`}
-											className='ml-2 text-blue-500'
+											className='ml-2 rounded-xl bg-purple-800 p-2 text-white'
 										>
 											More info
 										</Link>

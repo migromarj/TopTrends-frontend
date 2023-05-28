@@ -3,8 +3,7 @@ import Search from '../components/Search'
 import NavBar from '../components/NavBar'
 import { useCountries } from '../services/services'
 import { Blocks } from 'react-loader-spinner'
-import dynamic from 'next/dynamic'
-const Earth = dynamic(() => import('../components/Earth'), { ssr: false })
+import Earth from '../components/Earth'
 
 export default function Home() {
 	const { data } = useCountries()
@@ -16,11 +15,11 @@ export default function Home() {
 			</Head>
 			<main>
 				<NavBar />
-				<div className='absolute z-20 flex h-screen w-screen items-center justify-center'>
+				<div className='absolute z-20 flex h-screen w-full items-center justify-center'>
 					{data && <Search />}
 					{!data && (
-						<div className='flex flex-row items-center'>
-							<div className='text-3xl text-white'>Loading countries</div>
+						<div className='flex flex-row items-center rounded-xl border-2 border-black bg-purple-200 p-4'>
+							<div className='text-3xl text-black'>Loading countries</div>
 							<Blocks
 								height='50'
 								width='50'
@@ -31,7 +30,7 @@ export default function Home() {
 						</div>
 					)}
 				</div>
-				<Earth rotate />
+				<Earth footer />
 			</main>
 		</div>
 	)

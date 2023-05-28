@@ -10,13 +10,7 @@ import Country404 from '../../../../components/Country404.jsx'
 import Head from 'next/head.js'
 import Emotion from '../../../../components/Emotion.jsx'
 import { useSpecificCountry } from '../../../../services/services.js'
-
-import dynamic from 'next/dynamic'
-
-const Earth = dynamic(() => import('../../../../components/Earth.jsx'), {
-	ssr: false,
-})
-//import Earth from '../../../../components/Earth.jsx'
+import Earth from '../../../../components/Earth.jsx'
 
 export default function WordTrends() {
 	const router = useRouter()
@@ -75,8 +69,8 @@ export default function WordTrends() {
 				</Head>
 				<main>
 					<div>
-						<div className='fixed'>
-							<Earth autoFocus lat={lat} lng={lng} />
+						<div className='fixed h-screen w-screen'>
+							<Earth />
 						</div>
 						<div className='absolute w-full'>
 							<Title name={countryName} flag={flag} code={acronym} />

@@ -46,6 +46,12 @@ function check404(visit) {
 	cy.get('#not-found-text').should('exist')
 	cy.get('#not-found-text').should('be.visible')
 	cy.get('#not-found-text').should('include.text', 'Country not found')
+	cy.get('#go-back-button').should('exist')
+	cy.get('#go-back-button').should('be.visible')
+	cy.get('#go-back-button').click()
+	cy.wait(5000)
+	cy.url().should('include', '/')
+	cy.title().should('eq', 'TopTrends | Home')
 }
 
 function checkBackground(visit, title) {

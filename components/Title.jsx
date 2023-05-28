@@ -21,8 +21,8 @@ export default function Title(props) {
 
 	return (
 		<div className='flex flex-col'>
-			<NavBar />
-			<div id='countryTitle' className='mt-16'>
+			<NavBar zIndex={props.zIndex} />
+			<div id='countryTitle' className='mt-20'>
 				<div className='m-2 flex flex-row items-center text-white'>
 					<Link
 						id='previousPage'

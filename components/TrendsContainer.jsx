@@ -7,7 +7,7 @@ export default function TrendsContainer(props) {
 			{props.name !== 'YouTube' && (
 				<div
 					id={`${props.name}-title-container`}
-					className='flex items-center justify-center'
+					className='m-3 flex items-center justify-center'
 				>
 					<WebIcon name={props.name} />
 					<h2

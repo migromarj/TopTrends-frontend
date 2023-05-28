@@ -1,30 +1,12 @@
-import { gql, useQuery } from '@apollo/client'
 import { Bar, Pie } from 'react-chartjs-2'
 import Loading from './Loading'
 import Error from './Error'
+import { useTrendEmotion } from '../services/services'
 import { Chart, registerables } from 'chart.js'
 Chart.register(...registerables)
 
 export default function Emotion(props) {
-	const GET_TREND_EMOTION = gql`
-		query GetTrendEmotions($word: String, $videoId: String) {
-			trendEmotions(word: $word, videoId: $videoId) {
-				sadnessEmotion
-				joyEmotion
-				fearEmotion
-				angerEmotion
-				loveEmotion
-				surpriseEmotion
-				negativeEmotion
-				neutralEmotion
-				positiveEmotion
-			}
-		}
-	`
-
-	const { data, loading, error } = useQuery(GET_TREND_EMOTION, {
-		variables: { word: props.word, videoId: props.videoId },
-	})
+	const { data, loading, error } = useTrendEmotion(props)
 
 	if (loading || error) {
 		return (
@@ -64,7 +46,6 @@ export default function Emotion(props) {
 		const love = data.trendEmotions[0].loveEmotion
 		const surprise = data.trendEmotions[0].surpriseEmotion
 		const negative = data.trendEmotions[0].negativeEmotion
-		const neutral = data.trendEmotions[0].neutralEmotion
 		const positive = data.trendEmotions[0].positiveEmotion
 
 		const emotionGraph1 = {
@@ -141,17 +122,14 @@ export default function Emotion(props) {
 		}
 
 		const emotionGraph2 = {
-			labels: ['Negative emotion', 'Neutral emotion', 'Positive emotion'],
+			labels: ['Negative emotion', 'Positive emotion'],
 			datasets: [
 				{
 					label: 'Emotion Percentage (%)',
-					data: [negative, neutral, positive].map(value =>
-						(value * 100).toFixed(2)
-					),
+					data: [negative, positive].map(value => (value * 100).toFixed(2)),
 					fill: false,
 					backgroundColor: [
 						'rgba(255, 99, 132, 0.7)',
-						'rgba(255, 206, 86, 0.7)',
 						'rgba(75, 192, 192, 0.7)',
 					],
 					borderColor: 'rgba(0, 0, 0, 1)',
