@@ -23,8 +23,6 @@ const GET_SPECIFIC_COUNTRY = gql`
 			flag
 			woeid
 			pn
-			lat
-			lng
 		}
 	}
 `

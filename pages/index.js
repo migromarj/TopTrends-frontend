@@ -19,7 +19,7 @@ export default function Home() {
 					{data && <Search />}
 					{!data && (
 						<div className='flex flex-row items-center rounded-xl border-2 border-black bg-purple-200 p-4'>
-							<div className='text-3xl text-black'>Loading countries</div>
+							<div className='text-2xl text-black'>Loading countries</div>
 							<Blocks
 								height='50'
 								width='50'

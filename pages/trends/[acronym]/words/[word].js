@@ -57,8 +57,6 @@ export default function WordTrends() {
 		}
 		const countryName = data.allCountries[0].name
 		const flag = data.allCountries[0].flag
-		const lat = data.allCountries[0].lat
-		const lng = data.allCountries[0].lng
 
 		return (
 			<div>
