@@ -74,8 +74,6 @@ export default function Country() {
 		const flag = data.allCountries[0].flag
 		const woeid = data.allCountries[0].woeid
 		const pn = data.allCountries[0].pn
-		const lat = data.allCountries[0].lat
-		const lng = data.allCountries[0].lng
 
 		return (
 			<div>
@@ -84,7 +82,7 @@ export default function Country() {
 				</Head>
 				<main>
 					<div>
-						<EarthMap lat={lat} lng={lng}>
+						<EarthMap>
 							<Title name={name} flag={flag} />
 							<div
 								className={`mt-4 flex flex-wrap justify-around ${
